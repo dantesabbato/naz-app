@@ -1,14 +1,14 @@
-//\\//\\//\\ Libraries //\\//\\//\\
+//\\//\\//\\ LIBRARIES //\\//\\//\\
 import 'vue-awesome/icons'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import BootstrapVue from 'bootstrap-vue'
 import Vicon from 'vue-awesome/components/Icon'
 import Vue from 'vue'
-//\\//\\//\\ Modules //\\//\\//\\
+//\\//\\//\\ MODULES //\\//\\//\\
 import router from './router'
 import { index } from './stores'
-//\\//\\//\\ Components //\\//\\//\\
+//\\//\\//\\ COMPONENTS //\\//\\//\\
 import App from './App.vue'
 import Admin from './layouts/admin'
 import Main from './layouts/main'

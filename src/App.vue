@@ -16,17 +16,14 @@
 
 <style lang='sass'>
   @font-face
-    font-family: "PipoRegular"
-    src: url('assets/fonts/pipo_regular.ttf') format('truetype')
-  @font-face
-    font-family: "PipoLight"
-    src: url('assets/fonts/pipo_light.ttf') format('truetype')
-  @font-face
     font-family: "Cedra4F"
     src: url('assets/fonts/cedra4f_wide.ttf') format('truetype')
   @font-face
     font-family: "Cedra4FLight"
     src: url('assets/fonts/cedra4f_wide_ultralight.ttf') format('truetype')
+  @font-face
+    font-family: "OmniumTagline"
+    src: url('assets/fonts/omnium_tagline.otf') format('opentype')
 
   html, body, #app
     height: 100%
