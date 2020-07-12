@@ -1,6 +1,6 @@
 <template>
   <div id='app'>
-    <router-view :contacts='contacts'/>
+    <router-view/>
     <Footer/>
   </div>
 </template>
