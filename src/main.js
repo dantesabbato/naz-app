@@ -5,11 +5,12 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import BootstrapVue from 'bootstrap-vue'
 import Vicon from 'vue-awesome/components/Icon'
 import Vue from 'vue'
-//const fb = require('./firebaseConfig.js')
+//const fb = require('./firebase.js')
 
 //\\//\\//\\ MODULES //\\//\\//\\
 import router from './router'
-import { index } from './stores'
+import store from './stores/index'
+import { auth } from './firebase'
 
 //\\//\\//\\ COMPONENTS //\\//\\//\\
 import App from './App.vue'
@@ -22,8 +23,17 @@ Vue.component('main-layout', Main)
 Vue.component('v-icon', Vicon)
 Vue.use(BootstrapVue)
 
-new Vue({
-  router,
-  store: index,
-  render: h => h(App),
-}).$mount('#app')
+let app
+auth.onAuthStateChanged(user => {
+  if (!app) {
+    new Vue({
+      router,
+      store,
+      render: h => h(App),
+    }).$mount('#app')
+  }
+
+  if (user) {
+    store.dispatch('fetchUserProfile', user)
+  }
+})
