@@ -5,7 +5,6 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import BootstrapVue from 'bootstrap-vue'
 import Vicon from 'vue-awesome/components/Icon'
 import Vue from 'vue'
-//const fb = require('./firebase.js')
 
 //\\//\\//\\ MODULES //\\//\\//\\
 import router from './router'

@@ -1,25 +1,28 @@
 <template>
   <div id='women' class='models'>
-    <Modal/>
-    <b-container>
-      <card-set>
-        <card v-for='model in femaleModels'
-              :key='model.id'
-              v-b-modal.model_modal
-              @click='passModel(model)'>
-          <img :src='model.preview_path'>
-          <p>{{ model.name }}</p>
-        </card>
-      </card-set>
+    <b-container fluid="lg">
+      <b-card-group deck>
+        <router-link v-for='model in femaleModels'
+                     :key='model.id'
+                     :to="{ name: 'model', params: { id: model.id } }"
+        >
+          <b-card :img-src='model.preview_path'
+                  img-top
+                  class="border-0"
+          >
+            <b-card-text>
+              {{ model.name }}
+            </b-card-text>
+          </b-card>
+        </router-link>
+      </b-card-group>
     </b-container>
   </div>
 </template>
 
 <script>
   import { mapState } from 'vuex'
-  import Modal from './_modal'
   export default {
-    components: { Modal },
     name: 'women',
     data: () => ({
     }),
@@ -32,13 +35,11 @@
       }
     },
     methods: {
-      passModel(model) {
-        this.$store.dispatch('passModel', model)
-      }
+      // passModel(model) {
+      //   this.$store.dispatch('passModel', model)
+      // }
     }
   }
 </script>
 
-<style lang="sass">
-  @import "style"
-</style>
+<style lang="sass">@import "style"</style>

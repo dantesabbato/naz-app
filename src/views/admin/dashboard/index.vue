@@ -1,28 +1,124 @@
 <template>
   <div id='dashboard'>
+    <Modal/>
     <b-container>
-      <div id='model_froms'>
+      <div id='model_forms'>
         <h1>Анкеты</h1>
-        <div v-for='model_form in model_forms' :key='model_form.id'>
-          <b-card img-src='https://placekitten.com/300/300' img-right>
-            <b-card-text>
-              <content>
-                <label>Дата подачи анкеты</label><div>{{ model_form.created_at }}</div>
-                <label>Имя</label><div>{{ model_form.name }}</div>
-                <label>Фамилия</label><div>{{ model_form.surname }}</div>
-                <label>Дата рождения</label><div>{{ model_form.birthdate }}</div>
-                <label>Телефон</label><div>{{ model_form.phone }}</div>
-                <label>Email</label><div>{{ model_form.email }}</div>
-                <label>Instagram</label><div>{{ model_form.instagram }}</div>
-                <label>Рост</label><div>{{ model_form.height }}</div>
-                <label>Вес</label><div>{{ model_form.weight }}</div>
-                <label>Грудь</label><div>{{ model_form.bust }}</div>
-                <label>Бёдра</label><div>{{ model_form.hips }}</div>
-                <label>О себе</label><div>{{ model_form.about }}</div>
-              </content>
-            </b-card-text>
-          </b-card>
-        </div>
+        <b-card-group>
+          <div v-for='model_form in model_forms'
+               :key='model_form.id'
+          >
+            <b-card class="shadow-lg mr-3"
+                    v-b-modal.model_form_modal
+                    @click="passModel(model_form)"
+            >
+              <b-card-body>
+
+                <b-form-group label-cols-sm="6"
+                              :label="getTime(model_form.created_at, full_format)"
+                              label-for="name"
+                              label-align="left"
+                              label-size="sm"
+                >
+                  <div id="name" class="text-uppercase font-weight-bold">
+                    {{ model_form.name + " " + model_form.surname }}
+                  </div>
+                </b-form-group>
+
+                <b-form-group label="Email"
+                              label-for="email"
+                              label-align="right"
+                              label-cols-sm="6"
+                              label-size="sm"
+                >
+                  <div id="email">{{ model_form.email }}</div>
+                </b-form-group>
+
+                <b-form-group label="Телефон"
+                              label-for="phone"
+                              label-align="right"
+                              label-cols-sm="6"
+                              label-size="sm"
+                >
+                  <div id="phone">{{ model_form.phone }}</div>
+                </b-form-group>
+
+                <b-form-group label="Instagram"
+                              label-for="instagram"
+                              label-align="right"
+                              label-cols-sm="6"
+                              label-size="sm"
+                >
+                  <div id="instagram">{{ model_form.instagram }}</div>
+                </b-form-group>
+
+                <b-form-group label="Дата рождения"
+                              label-for="birthdate"
+                              label-align="right"
+                              label-cols-sm="6"
+                              label-size="sm"
+                >
+                  <div id="birthdate">{{ getTime(model_form.birthdate, short_format) }}</div>
+                </b-form-group>
+
+                <b-form-group label="Рост"
+                              label-for="height"
+                              label-align="right"
+                              label-cols-sm="6"
+                              label-size="sm"
+                >
+                  <div id="height">{{ model_form.height }}</div>
+                </b-form-group>
+
+                <b-form-group label="Талия"
+                              label-for="waist"
+                              label-align="right"
+                              label-cols-sm="6"
+                              label-size="sm"
+                >
+                  <div id="waist">{{ model_form.waist }}</div>
+                </b-form-group>
+
+                <b-form-group label="Грудь"
+                              label-for="bust"
+                              label-align="right"
+                              label-cols-sm="6"
+                              label-size="sm"
+                >
+                  <div id="bust">{{ model_form.bust }}</div>
+                </b-form-group>
+
+                <b-form-group label="Бёдра"
+                              label-for="hips"
+                              label-align="right"
+                              label-cols-sm="6"
+                              label-size="sm"
+                >
+                  <div id="hips">{{ model_form.hips }}</div>
+                </b-form-group>
+
+                <b-form-group label="О себе"
+                              label-for="about"
+                              label-align="right"
+                              label-cols-sm="6"
+                              label-size="sm"
+                >
+                  <div id="about">{{ model_form.about }}</div>
+                </b-form-group>
+
+                <b-form-group label="Дата создания"
+                              label-for="created_at"
+                              label-align="right"
+                              label-cols-sm="6"
+                              label-size="sm"
+                >
+                  <div id="created_at">{{ getTime(model_form.created_at, full_format) }}</div>
+                </b-form-group>
+
+              </b-card-body>
+            </b-card>
+          </div>
+        </b-card-group>
       </div>
     </b-container>
   </div>
@@ -30,23 +126,31 @@
 
 <script>
   import { mapState } from 'vuex'
+  import Modal from "./_modal"
+  import moment from "moment"
   export default {
     name: 'dashboard',
+    components: { Modal },
     data: () => ({
+      full_format: "DD.MM.YYYY hh:mm",
+      short_format: "DD.MM.YYYY"
     }),
     computed: {
       ...mapState(['model_forms'])
+    },
+    methods: {
+      getTime(time, format) {
+        if (time) {
+          let date = new Date(time.seconds * 1000)
+          return moment(date).format(format)
+        }
+      },
+      passModel(model_form) {
+        this.$store.dispatch("passModel", model_form)
+      }
     }
   }
 </script>
 
-<style lang="sass">
-  #model_froms
-    content
-      display: grid
-      grid-template-columns: 200px 500px
-      column-gap: 10px
-      label
-        color: rgba(98,94,101,0.36)
-        font-weight: bold
-</style>
+<style lang="sass">@import "style"</style>
+

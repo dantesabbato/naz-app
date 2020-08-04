@@ -2,7 +2,7 @@
   <div id='contacts' class='text-center'>
       <b-row>
         <b-col>
-          <div class='bold'>Contact us:</div>
+          <div class='bold uppercase'>Contact us:</div>
         </b-col>
       </b-row>
 
@@ -38,6 +38,5 @@
   }
 </script>
 
-<style lang="sass">
-  @import 'styles'
-</style>
+<style lang="sass">@import "style"</style>
+

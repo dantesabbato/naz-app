@@ -18,20 +18,23 @@ const routes = [
       { path: '/contacts', name: 'contacts', component: () => import('./views/contacts') },
       { path: '/info', name: 'info', component: () => import('./views/info') },
       { path: '/men', name: 'men', component: () => import('./views/models/men') },
-      { path: '/women', name: 'women', component: () => import('./views/models/women') }
+      { path: '/women', name: 'women', component: () => import('./views/models/women') },
+      { path: '/model/:id', name: 'model', props: true, component: () => import('./views/models/show') }
     ]
   },
   {
     path: '/admin',
     component: Admin,
     children: [
-      { path: 'dashboard', alias: '/', name: 'dashboard', component: () => import('./views/admin/dashboard') }
+      { path: 'dashboard', alias: '/', name: 'dashboard', component: () => import('./views/admin/dashboard') },
+      { path: 'models', name: 'admin-models', component: () => import('./views/admin/models') }
     ],
-    meta: {
-      requiresAuth: true
-    }
+    meta: { requiresAuth: true }
   },
-  { path: '/login', name: 'login', component: () => import('./views/admin/login') }
+  { path: '/login',
+    name: 'login',
+    component: () => import('./views/admin/login')
+  }
 ]
 
 const router = new Router({

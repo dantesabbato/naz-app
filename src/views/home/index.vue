@@ -1,7 +1,7 @@
 <template>
   <div id='home'>
-    <banner>NAZ</banner>
-    <subbanner>model management</subbanner>
+    <logo>NAZ</logo>
+    <sublogo>model management</sublogo>
     <Navbar/>
   </div>
 </template>
@@ -14,16 +14,4 @@
   }
 </script>
 
-<style lang="sass">
-  #home
-    display: flex
-    flex-direction: column
-    align-items: center
-    banner
-      font-family: 'OmniumTagline'
-      font-size: 25em
-      line-height: 70%
-      margin-top: 10%
-    subbanner
-      font-size: 6em
-</style>
+<style lang="sass">@import "style"</style>

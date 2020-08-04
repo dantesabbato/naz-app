@@ -21,12 +21,4 @@
   }
 </script>
 
-<style lang='sass'>
-  #logo
-    font-family: 'OmniumTagline'
-    font-size: 6rem
-    height: 95px
-    cursor: pointer
-  #content
-    padding-top: 3%
-</style>
+<style lang="sass">@import "style"</style>

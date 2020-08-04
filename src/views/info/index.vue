@@ -13,9 +13,5 @@
   }
 </script>
 
-<style lang="sass">
-  #info
-    p
-      font-size: 1.4rem
-      padding-bottom: 1%
-</style>
+<style lang="sass">@import "style"</style>
+

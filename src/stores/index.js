@@ -52,28 +52,16 @@ const store = new Vuex.Store({
     }
   },
   actions: {
-    async createModelForms(model_form) {
-      await fb.modelFormsCollection.add({
-        created_at: new Date(),
-        name: model_form.name,
-        surname: model_form.surname,
-        birthdate: model_form.birthdate,
-        phone: model_form.phone,
-        email: model_form.email,
-        instagram: model_form.instagram,
-        height: model_form.height,
-        weight: model_form.weight,
-        bust: model_form.bust,
-        hips: model_form.hips,
-        about: model_form.about
-      })
-    },
     async fetchUserProfile({ commit }, user) {
       const userProfile = await fb.usersCollection.doc(user.uid).get()
       commit('setUserProfile', userProfile.data())
       if (router.currentRoute.path === '/login') {
         router.push('/admin')
       }
+    },
+    async getModel({ commit }, id) {
+      let model = await fb.modelsCollection.doc(id).get()
+      commit('setSelectedModel', model.data())
     },
     async login({ dispatch }, form) {
       const { user } = await fb.auth.signInWithEmailAndPassword(form.email, form.password)

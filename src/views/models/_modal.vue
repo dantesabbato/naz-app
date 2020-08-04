@@ -2,7 +2,7 @@
   <b-modal id='model_modal' size='xl' hide-footer hide-header>
     <b-row>
       <b-col md='auto'>
-       <img :src='selectedModel.preview_path'>
+        <img :src='selectedModel.preview_path'>
       </b-col>
       <b-col align-self='center'>
         <content>
@@ -34,6 +34,4 @@
   }
 </script>
 
-<style lang='sass'>
-  @import "style"
-</style>
+<style lang="sass">@import "style"</style>
