@@ -1,5 +1,5 @@
 <template>
-  <div id="admin_models">
+  <div id="admin_models" class="mt-5">
     <Modal/>
     <b-button id="new-model">Новая модель</b-button>
     <b-container>
@@ -24,4 +24,4 @@
   }
 </script>
 
-<style lang="sass">@import "style"</style>
+<style lang="sass" scoped>@import "style"</style>
