@@ -1,7 +1,7 @@
 <template>
   <div id="model">
     <b-container>
-      <a @click="$router.go(-1)"><v-icon name="chevron-left"/>back</a>
+      <a @click="$router.go(-1)"><v-icon name="chevron-left" scale="2"/></a>
       <b-row>
         <b-col sm>
           <img :src="selectedModel.preview_path">
@@ -31,14 +31,8 @@
     name: "model",
     resource: "Model",
     props: ["id"],
-    data: () => ({
-    }),
-    created () {
-      this.getModel(this.id)
-    },
-    computed: {
-      ...mapState(["selectedModel"])
-    },
+    created () { this.getModel(this.id) },
+    computed: mapState(["selectedModel"]),
     methods: {
       getModel(id) {
         this.model = this.$store.dispatch('getModel', id)

@@ -5,10 +5,7 @@
         <b-form id="become-form" @submit="createModelForm">
           <b-row>
             <b-col lg>
-              <b-form-input v-model="model_form.name"
-                            placeholder="Name / Имя"
-                            required
-              />
+              <b-form-input v-model="model_form.name" placeholder="Name / Имя" required/>
             </b-col>
             <b-col lg>
               <b-form-input v-model="model_form.surname"

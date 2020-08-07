@@ -5,8 +5,6 @@ import router from  '../router'
 //\\//\\//\\//\\ IMPORT MODULES //\\//\\//\\//\\
 import contacts from './contacts'
 import info from './info'
-import model_forms from './model_forms'
-import models from './models'
 
 Vue.use(Vuex)
 
@@ -17,7 +15,8 @@ fb.modelsCollection.onSnapshot(snapshot => {
     model.id = doc.id
     modelArray.push(model)
   })
-  store.commit('setModels', modelArray)
+  store.commit('setMen', modelArray)
+  store.commit('setWomen', modelArray)
 })
 fb.modelFormsCollection.orderBy('created_at', 'desc').onSnapshot(snapshot => {
   let modelFormsArray = []
@@ -32,17 +31,24 @@ fb.modelFormsCollection.orderBy('created_at', 'desc').onSnapshot(snapshot => {
 const store = new Vuex.Store({
   state: {
     userProfile: {},
-    models: [],
+    men: [],
+    women: [],
     model_forms: [],
     selectedModel: []
   },
-  getters: {},
+  getters: {
+    MEN: state => { return state.men },
+    WOMEN: state => { return state.women }
+  },
   mutations: {
     setUserProfile(state, val) {
       state.userProfile = val
     },
-    setModels(state, val) {
-      state.models = val
+    setWomen(state, val) {
+      state.women = val.filter( model => !model.gender )
+    },
+    setMen(state, val) {
+      state.men = val.filter( model => model.gender )
     },
     setModelForms(state, val) {
       state.model_forms = val
@@ -76,7 +82,7 @@ const store = new Vuex.Store({
       commit('setSelectedModel', model)
     }
   },
-  modules: { contacts, info, model_forms, models }
+  modules: { contacts, info }
 })
 
 export default store

@@ -10,24 +10,27 @@
 
 @media all and (max-width: $phone )
   .navbar
-    padding: 0
-    position: fixed
-    top: 0
-    font-size: 1.5rem
-    text-align: center
-    z-index: 1
-    width: 100%
     background-color: #000000d1
     box-shadow: 0 0 10px rgba(0,0,0,0.5)
+    font-size: 1.5rem
+    padding: 0
+    position: fixed
+    text-align: center
+    top: 0
+    width: 100%
+    z-index: 1
   .nav-item
     a
       color: white!important
 
 .navbar-toggler
+  border: none
   color: black !important
   font-size: 27px
-  position: fixed
-  top: 6px
+  position: fixed!important
   right: 1%
+  top: 6px
   z-index: 1
-  border: none
+  svg
+    -webkit-filter: drop-shadow( 1px 1px 2px white )
+    filter: drop-shadow( -1px 1px 2px white )

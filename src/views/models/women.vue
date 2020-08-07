@@ -2,7 +2,7 @@
   <div id='women' class='models'>
     <b-container fluid="lg">
       <b-card-group deck>
-        <router-link v-for='model in femaleModels'
+        <router-link v-for='model in $store.getters.WOMEN'
                      :key='model.id'
                      :to="{ name: 'model', params: { id: model.id } }"
         >
@@ -20,26 +20,6 @@
   </div>
 </template>
 
-<script>
-  import { mapState } from 'vuex'
-  export default {
-    name: 'women',
-    data: () => ({
-    }),
-    created() {
-    },
-    computed: {
-      ...mapState(['models']),
-      femaleModels: function () {
-        return this.models.filter( m => !m.gender )
-      }
-    },
-    methods: {
-      // passModel(model) {
-      //   this.$store.dispatch('passModel', model)
-      // }
-    }
-  }
-</script>
+<script> export default { name: 'women' } </script>
 
-<style lang="sass">@import "style"</style>
+<style lang="sass"> @import "style" </style>
