@@ -5,6 +5,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import BootstrapVue from 'bootstrap-vue'
 import Vicon from 'vue-awesome/components/Icon'
 import Vue from 'vue'
+import Vuelidate from "vuelidate"
 
 //\\//\\//\\ MODULES //\\//\\//\\
 import router from './router'
@@ -21,6 +22,7 @@ Vue.component('admin-layout', Admin)
 Vue.component('main-layout', Main)
 Vue.component('v-icon', Vicon)
 Vue.use(BootstrapVue)
+Vue.use(Vuelidate)
 
 let app
 auth.onAuthStateChanged(user => {

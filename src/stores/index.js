@@ -4,7 +4,7 @@ import * as fb from '../firebase'
 import router from  '../router'
 //\\//\\//\\//\\ IMPORT MODULES //\\//\\//\\//\\
 import contacts from './contacts'
-import info from './info'
+import info from "./info"
 
 Vue.use(Vuex)
 
