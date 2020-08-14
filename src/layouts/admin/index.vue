@@ -4,7 +4,7 @@
       <b-navbar-nav>
         <b-nav-item to="/admin">Анкеты</b-nav-item>
         <b-nav-item to="/admin/models">Модели</b-nav-item>
-        <b-nav-item to="">Контент</b-nav-item>
+        <b-nav-item to="/admin/content">Контент</b-nav-item>
         <b-nav-item to='#'>Корзина</b-nav-item>
       </b-navbar-nav>
       <b-navbar-nav align="right">

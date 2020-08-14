@@ -1,10 +1,13 @@
 <template>
   <b-card-group deck>
-    <div v-for='model in models'
-         :key='model.id'
-         @click="passModel(model)"
-    >
-      <b-card class="shadow-lg" :img-src='model.preview_path' img-left bg-variant="dark" text-variant="white">
+    <div v-for='model in models' :key='model.id'>
+      <b-card class="shadow-lg"
+              :img-src='model.preview_path'
+              img-left bg-variant="dark"
+              text-variant="white"
+              @click="passModel(model)"
+              v-b-modal.model_modal
+      >
         <b-card-text>
           <content>
             <div>

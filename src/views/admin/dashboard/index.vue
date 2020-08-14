@@ -115,7 +115,7 @@
 
 <script>
   import { mapState } from 'vuex'
-  import Modal from "./show"
+  import Modal from "./edit"
   import moment from "moment"
   import { modelFormsCollection } from "@/firebase"
   export default {

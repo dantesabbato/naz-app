@@ -1,5 +1,5 @@
 <template>
-  <b-modal id="model_form_modal" class="squared" size="xl" hide-header>
+  <b-modal ref="model_form_modal" class="squared" size="xl" hide-header>
     <b-form-group label="Имя" label-for="name" label-cols-sm="2">
       <b-form-input id="name" v-model="selectedModel.name"/>
     </b-form-group>
@@ -45,7 +45,7 @@
     </b-form-group>
 
     <b-form-group label="Пол" label-cols-sm="2">
-      <b-form-radio-group buttons button-variant="outline-dark" :options="gander_radios"/>
+      <b-form-radio-group buttons button-variant="outline-dark" :options="gender_radios"/>
     </b-form-group>
 
     <b-form-group label="Волосы" label-for="hair" label-cols-sm="2">
@@ -70,15 +70,14 @@
   import { modelsCollection, modelFormsCollection } from "@/firebase"
   export default {
     data: () => ({
-      gender: null,
-      hair: "",
-      eyes: "",
-      photo: null,
-      preview_path: "",
-      gander_radios: [ { text: "М", value: true }, { text: "Ж", value: false } ]
+      gender: null, hair: "", eyes: "", photo: null, preview_path: "",
+      gender_radios: [ { text: "М", value: true }, { text: "Ж", value: false } ]
     }),
     computed: mapState(["selectedModel"]),
     methods: {
+      hideModal () {
+        this.$refs["model_form_modal"].hide()
+      },
       createModal(evt) {
         evt.preventDefault()
         modelsCollection.add({
@@ -99,10 +98,12 @@
           preview_path: "",
           created_at: new Date.now()
         })
+        this.hideModal()
       },
       removeModalForm(evt) {
         evt.preventDefault()
         modelFormsCollection.doc(this.selectedModel.id).delete()
+        this.hideModal()
       }
     }
   }

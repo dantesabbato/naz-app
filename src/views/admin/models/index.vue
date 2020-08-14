@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import Modal from "./show"
+  import Modal from "./edit"
   import CardGroup from "./index-card-group"
   export default {
     name: 'admin_models',

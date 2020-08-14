@@ -1,8 +1,9 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import * as fb from '../firebase'
-import router from  '../router'
+import Vue from "vue"
+import Vuex from "vuex"
+import * as fb from "../firebase"
+import router from  "../router"
 //\\//\\//\\//\\ IMPORT MODULES //\\//\\//\\//\\
+import become from "./become"
 import contacts from './contacts'
 import info from "./info"
 
@@ -41,21 +42,11 @@ const store = new Vuex.Store({
     WOMEN: state => { return state.women }
   },
   mutations: {
-    setUserProfile(state, val) {
-      state.userProfile = val
-    },
-    setWomen(state, val) {
-      state.women = val.filter( model => !model.gender )
-    },
-    setMen(state, val) {
-      state.men = val.filter( model => model.gender )
-    },
-    setModelForms(state, val) {
-      state.model_forms = val
-    },
-    setSelectedModel(state, val) {
-      state.selectedModel = val
-    }
+    setUserProfile(state, val) { state.userProfile = val },
+    setWomen(state, val) { state.women = val.filter( model => !model.gender ) },
+    setMen(state, val) { state.men = val.filter( model => model.gender ) },
+    setModelForms(state, val) { state.model_forms = val },
+    setSelectedModel(state, val) { state.selectedModel = val }
   },
   actions: {
     async fetchUserProfile({ commit }, user) {
@@ -82,7 +73,7 @@ const store = new Vuex.Store({
       commit('setSelectedModel', model)
     }
   },
-  modules: { contacts, info }
+  modules: { become, contacts, info }
 })
 
 export default store

@@ -110,10 +110,8 @@
 
       <b-col lg>
         <div id="become-info">
-          <div>To become a NAZ model fill up the form or emails us your snapshots and include your name, age, height and location.</div>
-          <a :href="`mailto:${ getContactEmail }`">{{ getContactEmail }}</a>
-          <div>Чтобы стать моделью нашего агентства, заполните форму на этой странице или отправьте нам электронное письмо, включающее свежие снепы, имя, информацию о возрасте, параметрах и городе проживания.</div>
-          <a :href="`mailto:${ getContactEmail }`">{{ getContactEmail }}</a>
+          <p>{{ BECOME_EN }}</p><a :href="`mailto:${ getContactEmail }`">{{ getContactEmail }}</a>
+          <p>{{ BECOME_RU }}</p><a :href="`mailto:${ getContactEmail }`">{{ getContactEmail }}</a>
         </div>
       </b-col>
 
@@ -124,6 +122,7 @@
 <script>
   import { modelFormsCollection } from "@/firebase"
   import { required, maxLength, numeric, email } from "vuelidate/lib/validators"
+  import { mapGetters } from "vuex"
   export default {
     name: "become",
     data: () => ({
@@ -143,28 +142,21 @@
       about: { maxLength: maxLength(300) }
     },
     computed: {
-      getContactEmail() { return this.$store.getters.CONTACTS_EMAIL }
+      ...mapGetters("become", ["BECOME_EN", "BECOME_RU"]),
+      getContactEmail() { return this.$store.getters["contacts/CONTACTS_EMAIL"] }
     },
     methods: {
       createModelForm(evt) {
         evt.preventDefault()
         modelFormsCollection.add({
           created_at: new Date(),
-          name: this.name,
-          surname: this.surname,
-          birthdate: this.birthdate,
-          phone: this.phone,
-          email: this.email,
-          instagram: this.instagram,
-          height: this.height,
-          waist: this.waist,
-          bust: this.bust,
-          hips: this.hips,
+          name: this.name, surname: this.surname, birthdate: this.birthdate, phone: this.phone, email: this.email,
+          instagram: this.instagram, height: this.height, waist: this.waist, bust: this.bust, hips: this.hips,
           about: this.about
         })
         this.name = "", this.surname = "", this.birthdate = "", this.phone = "", this.email = "", this.instagram = "",
-        this.height = "", this.waist = "", this.bust = "", this.hips = "", this.about = ""
-        this.show_form = false
+        this.height = "", this.waist = "", this.bust = "", this.hips = "", this.about = "",
+        this.show_form = false,
         this.show_gratitude = true
       }
     }
