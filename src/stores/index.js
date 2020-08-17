@@ -9,7 +9,7 @@ import info from "./info"
 
 Vue.use(Vuex)
 
-fb.modelsCollection.onSnapshot(snapshot => {
+fb.modelsCollection.orderBy('name').onSnapshot(snapshot => {
   let modelArray = []
   snapshot.forEach(doc => {
     let model = doc.data()
@@ -39,7 +39,8 @@ const store = new Vuex.Store({
   },
   getters: {
     MEN: state => { return state.men },
-    WOMEN: state => { return state.women }
+    WOMEN: state => { return state.women },
+    MODEL_FORMS: state => { return state.model_forms }
   },
   mutations: {
     setUserProfile(state, val) { state.userProfile = val },

@@ -1,14 +1,15 @@
 //\\//\\//\\//\\ INDEX //\\//\\//\\//\\
 
 .models
-
   .card
     cursor: pointer
     &-body
       padding: 0.5rem
+    &-deck
+      width: 70%
+      margin: auto
     &-deck a:hover
       text-decoration: none
-
     p
       color: black
       font-size: 1.5em
@@ -16,8 +17,8 @@
       text-align: center
     img
       object-fit: cover
-      max-width: 400px
-      height: 500px
+      max-width: 300px
+      height: 400px
       border-radius: 0
 
 //\\//\\//\\//\\ SHOW //\\//\\//\\//\\
@@ -25,12 +26,20 @@
 #model
   a
     color: black
-    font-size: 27px
+    font-size: 2rem
+    font-weight: bold
     margin: 15px
     padding-bottom: 15px
     cursor: pointer
     text-decoration: none
     z-index: 1
+    @media all and (max-width: $phone )
+      font-size: 1rem
+    &:after
+      @media all and (max-width: $desktop )
+        content: "back"
+      @media all and (max-width: $phone )
+        content: ""
     svg
       margin-right: 5px
     @media all and (max-width: $phone )
@@ -48,8 +57,8 @@
     padding: 0
   img
     object-fit: cover
-    max-width: 350px
-    height: 500px
+    max-width: 500px
+    //height: 500px
 
   content
     p

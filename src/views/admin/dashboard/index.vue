@@ -1,10 +1,10 @@
 <template>
   <div id='dashboard'>
-    <Modal/>
+    <Edit/>
     <div id='model_forms' class="pt-5">
       <b-container>
         <b-card-group>
-          <div v-for='model_form in model_forms'
+          <div v-for='model_form in $store.getters.MODEL_FORMS'
                :key='model_form.id'
           >
             <b-card class="squared border-dark shadow-lg m-2"
@@ -114,13 +114,12 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
-  import Modal from "./edit"
+  import Edit from "./edit"
   import moment from "moment"
   import { modelFormsCollection } from "@/firebase"
   export default {
     name: 'dashboard',
-    components: { Modal },
+    components: { Edit },
     data: () => ({
       default_options: [{
         "label-align": "right",
@@ -130,9 +129,6 @@
       full_format: "DD.MM.YYYY hh:mm",
       short_format: "DD.MM.YYYY"
     }),
-    computed: {
-      ...mapState(['model_forms'])
-    },
     methods: {
       getTime(time, format) {
         if (time) {

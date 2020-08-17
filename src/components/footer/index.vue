@@ -3,9 +3,15 @@
     <b-container>
       <hr>
       <b-nav align='center'>
-        <b-nav-item><v-icon name='brands/facebook-f' style="fill: black"/></b-nav-item>
-        <b-nav-item><v-icon name='brands/vk' style="fill: black"/></b-nav-item>
-        <b-nav-item><v-icon name='brands/instagram' style="fill: black"/></b-nav-item>
+        <b-nav-item to="/facebook">
+          <v-icon name='brands/facebook-f' scale="1.5" style="fill: black"/>
+        </b-nav-item>
+        <b-nav-item to="/vk">
+          <v-icon name='brands/vk' scale="1.5" style="fill: black"/>
+        </b-nav-item>
+        <b-nav-item to="/instagram">
+          <v-icon name='brands/instagram' scale="1.5" style="fill: black"/>
+        </b-nav-item>
       </b-nav>
       <div id='copyright' align='center'>
         <div>© NAZ model management 2020 / Created by MaxKagami</div>

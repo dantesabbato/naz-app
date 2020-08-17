@@ -1,5 +1,5 @@
 <template>
-  <b-modal id='model_modal' size='xl' hide-footer hide-header>
+  <b-modal id='model_edit' size='xl' hide-footer hide-header>
     <b-row>
       <b-col md='auto'>
         <img :src='selectedModel.preview_path'>
@@ -53,7 +53,7 @@
           </b-form-group>
 
           <b-form-group label="Пол" label-cols-sm="2">
-            <b-form-radio-group buttons button-variant="outline-dark" :options="gender_radios"/>
+            <b-form-radio-group v-model="selectedModel.gender" buttons button-variant="outline-dark" :options="gender_radios"/>
           </b-form-group>
 
           <b-form-group label="Волосы" label-for="hair" label-cols-sm="2">

@@ -1,5 +1,5 @@
 <template>
-  <b-modal ref="model_form_modal" class="squared" size="xl" hide-header>
+  <b-modal id="model_form_modal" class="squared" size="xl" hide-header>
     <b-form-group label="Имя" label-for="name" label-cols-sm="2">
       <b-form-input id="name" v-model="selectedModel.name"/>
     </b-form-group>
@@ -78,9 +78,9 @@
       hideModal () {
         this.$refs["model_form_modal"].hide()
       },
-      createModal(evt) {
+     async  createModal(evt) {
         evt.preventDefault()
-        modelsCollection.add({
+        await modelsCollection.add({
           name: this.selectedModel.name,
           surname: this.selectedModel.surname,
           birthdate: this.selectedModel.birthdate,
@@ -100,9 +100,9 @@
         })
         this.hideModal()
       },
-      removeModalForm(evt) {
+      async removeModalForm(evt) {
         evt.preventDefault()
-        modelFormsCollection.doc(this.selectedModel.id).delete()
+        await modelFormsCollection.doc(this.selectedModel.id).delete()
         this.hideModal()
       }
     }
