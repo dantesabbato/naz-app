@@ -1,6 +1,6 @@
 <template>
   <b-modal id="model_new" size="sm" hide-footer hide-header>
-    <b-form @submit="createModel">
+    <b-form @submit.prevent="createModel">
       <b-form-input v-model="name" placeholder="Имя"/>
       <b-form-input v-model="surname" placeholder="Фамилия"/>
       <b-form-input v-model="email" placeholder="Email"/>
@@ -37,7 +37,6 @@
       name: "", surname: "", birthdate: "", gender: null, phone: "", email: "", instagram: "", height: "",
       waist: "", bust: "", hips: "", hair: "", eyes: "", about: "", preview_path: "",
       gender_radios: [ { text: "М", value: true }, { text: "Ж", value: false } ],
-      images: [],
       dropzoneOptions: {
         url: "https://httpbin.org/post",
         thumbnailWidth: 150,
@@ -68,8 +67,7 @@
         } catch (error) { console.log(error) }
         //this.$refs.imgDropZone.removeFile(upload)
       },
-      async createModel(evt) {
-        evt.preventDefault()
+      async createModel() {
         await modelsCollection.add({
           name: this.name, surname: this.surname, birthdate: this.birthdate, gender: this.gender, phone: this.phone,
           email: this.email, instagram: this.email, height: this.height, waist: this.waist, bust: this.bust,

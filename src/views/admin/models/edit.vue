@@ -5,8 +5,8 @@
         <img :src='selectedModel.preview_path'>
       </b-col>
       <b-col align-self='center'>
-        <ul>
-          <li><label>Дата добавления</label><div>{{ selectedModel.created_at }}</div></li>
+        <label>Дата добавления</label><div>{{ selectedModel.created_at }}</div>
+        <b-form @submit.prevent="updateModel">
 
           <b-form-group label="Имя" label-for="name" label-cols-sm="2">
             <b-form-input id="name" v-model="selectedModel.name"/>
@@ -64,22 +64,36 @@
             <b-form-input id="eyes" v-model="selectedModel.eyes"/>
           </b-form-group>
 
-        </ul>
+          <b-button type="submit" variant="outline-dark" size="sm" class="ml-2 font-weight-bold" squared>
+            Обновить
+          </b-button>
+          <b-button @click="removeModel" variant="outline-danger" size="sm" class="ml-2 font-weight-bold" squared>
+            Удалить
+          </b-button>
+        </b-form>
       </b-col>
     </b-row>
   </b-modal>
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapState } from "vuex"
+  import { modelsCollection } from "@/firebase"
   export default {
-    name: 'admin_modal',
+    name: "admin_modal",
     data: () => ({
       gender_radios: [ { text: "М", value: true }, { text: "Ж", value: false } ]
     }),
-    computed: mapState(['selectedModel']),
+    computed: mapState(["selectedModel"]),
     methods: {
-      // getGender(gender) { return  gender ? "М" : "Ж" }
+      async updateModel() {
+        await modelsCollection.doc(this.selectedModel.id).update(this.selectedModel)
+        this.$bvModal.hide("model_edit")
+      },
+      async removeModel() {
+        await modelsCollection.doc(this.selectedModel.id).delete()
+        this.$bvModal.hide("model_edit")
+      }
     }
   }
 </script>
