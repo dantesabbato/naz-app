@@ -156,8 +156,7 @@
         })
         this.name = "", this.surname = "", this.birthdate = "", this.phone = "", this.email = "", this.instagram = "",
         this.height = "", this.waist = "", this.bust = "", this.hips = "", this.about = "",
-        this.show_form = false,
-        this.show_gratitude = true
+        this.show_form = false, this.show_gratitude = true
       }
     }
   }
