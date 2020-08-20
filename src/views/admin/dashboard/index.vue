@@ -136,12 +136,8 @@
           return moment(date).format(format)
         }
       },
-      passModel(model_form) {
-        this.$store.dispatch("passModel", model_form)
-      },
-      removeModelForm(id) {
-        modelFormsCollection.doc(id).delete()
-      }
+      passModel(model_form) { this.$store.dispatch("passModel", model_form) },
+      removeModelForm(id) { modelFormsCollection.doc(id).delete() }
     }
   }
 </script>

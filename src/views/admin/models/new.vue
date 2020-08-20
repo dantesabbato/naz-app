@@ -37,11 +37,12 @@
       name: "", surname: "", birthdate: "", gender: null, phone: "", email: "", instagram: "", height: "",
       waist: "", bust: "", hips: "", hair: "", eyes: "", about: "", preview_path: "",
       gender_radios: [ { text: "М", value: true }, { text: "Ж", value: false } ],
+      file: null, metadata: "", imageName: "",
       dropzoneOptions: {
         url: "https://httpbin.org/post",
         thumbnailWidth: 150,
         thumbnailHeight: 150,
-        addRemoveLinks: false,
+        addRemoveLinks: true,
         acceptedFiles: ".jpg, .jpeg, .png",
         dictDefaultMessage: `
           <p class='text-default'><i class='fa fa-cloud-upload mr-2'></i>Нажмите или перетащите фото</p>
@@ -51,23 +52,17 @@
     }),
     components: { vueDropzone: vue2Dropzone },
     methods: {
-      hideModal () {
-        this.$refs["model_new"].hide()
-      },
-      async afterComplete(upload) {
-        let imageName = uuid.v1()
+      afterComplete(upload) {
         this.isLoading = true
-        try {
-          let file = upload
-          let metadata = { contentType: "image/png" }
-          let imageRef = storage.ref().child(imageName)
-
-          await imageRef.put(file, metadata)
-          this.preview_path = await imageRef.getDownloadURL()
-        } catch (error) { console.log(error) }
+        this.imageName = uuid.v1()
+        this.file = upload
+        this.metadata = { contentType: "image/png" }
         //this.$refs.imgDropZone.removeFile(upload)
       },
       async createModel() {
+        let imageRef = storage.ref().child(this.imageName)
+        await imageRef.put(this.file, this.metadata)
+        this.preview_path = await imageRef.getDownloadURL()
         await modelsCollection.add({
           name: this.name, surname: this.surname, birthdate: this.birthdate, gender: this.gender, phone: this.phone,
           email: this.email, instagram: this.email, height: this.height, waist: this.waist, bust: this.bust,
