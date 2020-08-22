@@ -1,6 +1,6 @@
 <template>
   <div id="men" class="models">
-    <b-card-group deck>
+    <b-card-group deck class="fade-in">
       <router-link v-for="model in $store.getters.MEN"
                    :key="model.id"
                    :to="{ name: 'model', params: { id: model.id } }"
@@ -18,6 +18,11 @@
   </div>
 </template>
 
-<script> export default { name: "men" } </script>
+<script>
+export default {
+  name: "men",
+  created () { this.$store.dispatch("getModels") }
+}
+</script>
 
 <style lang="sass">@import "style"</style>

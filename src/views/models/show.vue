@@ -1,22 +1,22 @@
 <template>
-  <div id="model">
+  <div id="model" class="fade-in">
     <b-container>
       <a @click="$router.go(-1)"><v-icon name="chevron-left" scale="2"/></a>
       <b-row class="mt-4 mb-5">
         <b-col sm>
-          <img :src="selectedModel.preview_path">
+          <img :src="model.preview_path">
         </b-col>
         <b-col sm align-self="center">
           <content>
-            <p>{{ selectedModel.name }}</p>
+            <p>{{ model.name }}</p>
             <ul>
-              <li v-if="selectedModel.height"><label>Height</label><div>{{ selectedModel.height }}</div></li>
-              <li v-if="selectedModel.bust"><label>Bust</label><div>{{ selectedModel.bust }}</div></li>
-              <li v-if="selectedModel.waist"><label>Waist</label><div>{{ selectedModel.waist }}</div></li>
-              <li v-if="selectedModel.hips"><label>Hips</label><div>{{ selectedModel.hips }}</div></li>
-              <li v-if="selectedModel.shoe"><label>Shoe</label><div>{{ selectedModel.shoe }}</div></li>
-              <li v-if="selectedModel.hair"><label>Hair</label><div>{{ selectedModel.hair }}</div></li>
-              <li v-if="selectedModel.eyes"><label>Eyes</label><div>{{ selectedModel.eyes }}</div></li>
+              <li v-if="model.height"><label>Height</label><div>{{ model.height }}</div></li>
+              <li v-if="model.bust"><label>Bust</label><div>{{ model.bust }}</div></li>
+              <li v-if="model.waist"><label>Waist</label><div>{{ model.waist }}</div></li>
+              <li v-if="model.hips"><label>Hips</label><div>{{ model.hips }}</div></li>
+              <li v-if="model.shoe"><label>Shoe</label><div>{{ model.shoe }}</div></li>
+              <li v-if="model.hair"><label>Hair</label><div>{{ model.hair }}</div></li>
+              <li v-if="model.eyes"><label>Eyes</label><div>{{ model.eyes }}</div></li>
             </ul>
           </content>
         </b-col>
@@ -26,16 +26,18 @@
 </template>
 
 <script>
-  import { mapState } from "vuex"
   export default {
     name: "model",
-    resource: "Model",
+    resource: "model",
     props: ["id"],
-    created () { this.getModel(this.id) },
-    computed: mapState(["selectedModel"]),
+    data: () => ({ model: [] }),
+    created () { this.getModel() },
     methods: {
-      getModel(id) {
-        this.model = this.$store.dispatch('getModel', id)
+      // async getModel() {
+      //   await modelsCollection.doc(this.id).get().then(snapshot => { this.model = snapshot.data() })
+      // }
+      getModel() {
+        this.model = this.$store.dispatch('getModel', this.id)
       }
     }
   }

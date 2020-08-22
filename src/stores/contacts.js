@@ -1,12 +1,6 @@
 import { contentCollection } from '@/firebase'
 import store from "@/stores"
 
-contentCollection.doc("contacts").get().then(snapshot => {
-  if (!snapshot.exists) return
-  let data = snapshot.data()
-  store.commit('contacts/setContacts', data)
-})
-
 export default {
   namespaced: true,
   state: { contacts: {} },
@@ -16,5 +10,15 @@ export default {
     CONTACTS_CEO_EMAIL: state => { return state.contacts.ceo_email },
     CONTACTS_BOOKER_EMAIL: state => { return state.contacts.booker_email }
   },
-  mutations: { setContacts(state, val) { state.contacts = val } }
+  mutations: { setContacts(state, val) { state.contacts = val } },
+  actions: {
+    async getContacts ({ state }) {
+      if (state.contacts.length) { return }
+      await contentCollection.doc("contacts").get().then(snapshot => {
+        if (!snapshot.exists) return
+        let data = snapshot.data()
+        store.commit('contacts/setContacts', data)
+      })
+    }
+  }
 }

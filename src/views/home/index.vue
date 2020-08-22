@@ -1,5 +1,5 @@
 <template>
-  <div id='home'>
+  <div id="home" class="fade-in">
     <logo>NAZ</logo>
     <sublogo>model management</sublogo>
     <Navbar/>
@@ -9,7 +9,7 @@
 <script>
   import Navbar from "../../components/navbar/index"
   export default {
-    name: 'home',
+    name: "home",
     components: { Navbar }
   }
 </script>

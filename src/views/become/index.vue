@@ -1,5 +1,5 @@
 <template>
-  <div id="become">
+  <div id="become" class="fade-in">
     <b-row>
       <b-col lg>
         <b-form id="become-form" @submit="createModelForm" v-if="show_form">
@@ -141,6 +141,7 @@
       birthdate: { required },
       about: { maxLength: maxLength(300) }
     },
+    created () { this.$store.dispatch("become/getBecome") },
     computed: {
       ...mapGetters("become", ["BECOME_EN", "BECOME_RU"]),
       getContactEmail() { return this.$store.getters["contacts/CONTACTS_EMAIL"] }

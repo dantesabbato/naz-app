@@ -9,16 +9,6 @@ import info from "./info"
 
 Vue.use(Vuex)
 
-fb.modelsCollection.orderBy('name').onSnapshot(snapshot => {
-  let modelArray = []
-  snapshot.forEach(doc => {
-    let model = doc.data()
-    model.id = doc.id
-    modelArray.push(model)
-  })
-  store.commit('setMen', modelArray)
-  store.commit('setWomen', modelArray)
-})
 fb.modelFormsCollection.orderBy('created_at', 'desc').onSnapshot(snapshot => {
   let modelFormsArray = []
   snapshot.forEach(doc => {
@@ -32,24 +22,34 @@ fb.modelFormsCollection.orderBy('created_at', 'desc').onSnapshot(snapshot => {
 const store = new Vuex.Store({
   state: {
     userProfile: {},
-    men: [],
-    women: [],
+    models: [],
     model_forms: [],
     selectedModel: []
   },
   getters: {
-    MEN: state => { return state.men },
-    WOMEN: state => { return state.women },
-    MODEL_FORMS: state => { return state.model_forms }
+    MEN: state => { return state.models.filter( model => model.gender ) },
+    WOMEN: state => { return state.models.filter( model => !model.gender ) },
+    MODEL_FORMS: state => { return state.model_forms },
   },
   mutations: {
     setUserProfile(state, val) { state.userProfile = val },
-    setWomen(state, val) { state.women = val.filter( model => !model.gender ) },
-    setMen(state, val) { state.men = val.filter( model => model.gender ) },
+    setModels(state, val) { state.models = val },
     setModelForms(state, val) { state.model_forms = val },
     setSelectedModel(state, val) { state.selectedModel = val }
   },
   actions: {
+    async getModels({ state }) {
+      if (state.models.length) { return }
+      await fb.modelsCollection.orderBy('name').onSnapshot(snapshot => {
+        let modelArray = []
+        snapshot.forEach(doc => {
+          let model = doc.data()
+          model.id = doc.id
+          modelArray.push(model)
+        })
+        store.commit("setModels", modelArray)
+      })
+    },
     async fetchUserProfile({ commit }, user) {
       const userProfile = await fb.usersCollection.doc(user.uid).get()
       commit('setUserProfile', userProfile.data())
@@ -57,9 +57,11 @@ const store = new Vuex.Store({
         router.push('/admin')
       }
     },
-    async getModel({ commit }, id) {
-      let model = await fb.modelsCollection.doc(id).get()
-      commit('setSelectedModel', model.data())
+    getModel({ state }, id) {
+      // this.selectedModel = []
+      // let model = await fb.modelsCollection.doc(id).get()
+      return state.models.search( model => model.id = id )
+      //commit('setSelectedModel', model.data())
     },
     async login({ dispatch }, form) {
       const { user } = await fb.auth.signInWithEmailAndPassword(form.email, form.password)
