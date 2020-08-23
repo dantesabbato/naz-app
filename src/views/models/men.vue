@@ -1,7 +1,7 @@
 <template>
   <div id="men" class="models">
     <b-card-group deck class="fade-in">
-      <router-link v-for="model in $store.getters.MEN"
+      <router-link v-for="model in $store.getters['models/MEN']"
                    :key="model.id"
                    :to="{ name: 'model', params: { id: model.id } }"
       >
@@ -21,7 +21,7 @@
 <script>
 export default {
   name: "men",
-  created () { this.$store.dispatch("getModels") }
+  created () { this.$store.dispatch("models/getModels") }
 }
 </script>
 

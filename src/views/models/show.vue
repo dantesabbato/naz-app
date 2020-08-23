@@ -30,14 +30,12 @@
     name: "model",
     resource: "model",
     props: ["id"],
-    data: () => ({ model: [] }),
-    created () { this.getModel() },
+    data: () => ({ model: {} }),
+    created () { this.init() },
     methods: {
-      // async getModel() {
-      //   await modelsCollection.doc(this.id).get().then(snapshot => { this.model = snapshot.data() })
-      // }
-      getModel() {
-        this.model = this.$store.dispatch('getModel', this.id)
+      async init() {
+        await this.$store.dispatch("models/getModels")
+        this.model = await this.$store.dispatch("models/getModel", this.id)
       }
     }
   }

@@ -47,15 +47,15 @@
       </b-form-group>
 
       <b-form-group label="Пол" label-cols-sm="2">
-        <b-form-radio-group v-model="gender" buttons button-variant="outline-dark" :options="gender_radios"/>
+        <b-form-radio-group v-model="selectedModel.gender" buttons button-variant="outline-dark" :options="gender_radios"/>
       </b-form-group>
 
       <b-form-group label="Волосы" label-for="hair" label-cols-sm="2">
-        <b-form-input id="hair" v-model="hair"/>
+        <b-form-input id="hair" v-model="selectedModel.hair"/>
       </b-form-group>
 
       <b-form-group label="Глаза" label-for="eyes" label-cols-sm="2">
-        <b-form-input id="eyes" v-model="eyes"/>
+        <b-form-input id="eyes" v-model="selectedModel.eyes"/>
       </b-form-group>
 
       <vue-dropzone
@@ -74,14 +74,14 @@
 
 <script>
   import { mapState } from 'vuex'
-  import { modelsCollection, modelFormsCollection, storage } from "@/firebase"
-  import * as firebase from "firebase/app"
+  import { storage } from "@/firebase"
   import vue2Dropzone from "vue2-dropzone"
   import "vue2-dropzone/dist/vue2Dropzone.min.css"
   let uuid = require("uuid")
   export default {
     data: () => ({
-      gender: null, hair: "", eyes: "", preview_path: "",
+      model: null,
+      preview_path: "",
       gender_radios: [ { text: "М", value: true }, { text: "Ж", value: false } ],
       file: null, metadata: "", imageName: "",
       dropzoneOptions: {
@@ -112,20 +112,23 @@
       async  createModel() {
         let imageRef = storage.ref().child(this.imageName)
         await imageRef.put(this.file, this.metadata)
-        this.preview_path = await imageRef.getDownloadURL()
-        await modelsCollection.add({
-          name: this.selectedModel.name, surname: this.selectedModel.surname, birthdate: this.selectedModel.birthdate,
-          gender: this.gender, phone: this.selectedModel.phone, email: this.selectedModel.email,
-          instagram: this.selectedModel.email, height: this.selectedModel.height, waist: this.selectedModel.waist,
-          bust: this.selectedModel.bust, hips: this.selectedModel.hips, hair: this.hair, eyes: this.eyes,
-          about: this.selectedModel.about,
-          created_at: firebase.firestore.Timestamp.fromDate(new Date()),
-          preview_path: this.preview_path
-        })
+        this.selectedModel.preview_path = await imageRef.getDownloadURL()
+        // await modelsCollection.add({
+        //   name: this.selectedModel.name, surname: this.selectedModel.surname, birthdate: this.selectedModel.birthdate,
+        //   gender: this.gender, phone: this.selectedModel.phone, email: this.selectedModel.email,
+        //   instagram: this.selectedModel.email, height: this.selectedModel.height, waist: this.selectedModel.waist,
+        //   bust: this.selectedModel.bust, hips: this.selectedModel.hips, hair: this.hair, eyes: this.eyes,
+        //   about: this.selectedModel.about,
+        //   created_at: firebase.firestore.Timestamp.fromDate(new Date()),
+        //   preview_path: this.preview_path
+        // })
+        //this.selectedModel.created_at = firebase.firestore.Timestamp.fromDate(new Date())
+        //hair: this.hair, eyes: this.eyes, gender: this.gender, preview_path: this.preview_path,
+        await this.$store.dispatch("model/createModel", this.selectedModel)
         await this.removeModalForm()
       },
       async removeModalForm() {
-        await modelFormsCollection.doc(this.selectedModel.id).delete()
+        await this.$store.dispatch("model_forms/removeModalForm", this.selectedModel.id)
         this.hideModal()
       }
     }

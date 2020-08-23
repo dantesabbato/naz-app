@@ -24,7 +24,8 @@
   import CardGroup from "./index-card-group"
   export default {
     name: 'admin_models',
-    components: { Edit, New, CardGroup }
+    components: { Edit, New, CardGroup },
+    created() { this.$store.dispatch("getModels") }
   }
 </script>
 

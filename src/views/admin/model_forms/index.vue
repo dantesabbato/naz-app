@@ -4,7 +4,7 @@
     <div id='model_forms' class="pt-5">
       <b-container>
         <b-card-group>
-          <div v-for='model_form in $store.getters.MODEL_FORMS'
+          <div v-for="model_form in $store.getters['model_forms/MODEL_FORMS']"
                :key='model_form.id'
           >
             <b-card class="squared border-dark shadow-lg m-2"
@@ -116,7 +116,6 @@
 <script>
   import Edit from "./edit"
   import moment from "moment"
-  import { modelFormsCollection } from "@/firebase"
   export default {
     name: 'dashboard',
     components: { Edit },
@@ -129,6 +128,7 @@
       full_format: "DD.MM.YYYY hh:mm",
       short_format: "DD.MM.YYYY"
     }),
+    created() { this.$store.dispatch("model_forms/getModelForms") },
     methods: {
       getTime(time, format) {
         if (time) {
@@ -137,7 +137,7 @@
         }
       },
       passModel(model_form) { this.$store.dispatch("passModel", model_form) },
-      removeModelForm(id) { modelFormsCollection.doc(id).delete() }
+      removeModelForm(id) { this.$store.dispatch("model_forms/removeModelForm", id) }
     }
   }
 </script>

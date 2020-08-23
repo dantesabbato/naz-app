@@ -2,7 +2,7 @@
   <div id="become" class="fade-in">
     <b-row>
       <b-col lg>
-        <b-form id="become-form" @submit="createModelForm" v-if="show_form">
+        <b-form id="become-form" @submit.prevent="createModelForm" v-if="show_form">
           <b-row>
 
             <b-col lg>
@@ -120,7 +120,6 @@
 </template>
 
 <script>
-  import { modelFormsCollection } from "@/firebase"
   import { required, maxLength, numeric, email } from "vuelidate/lib/validators"
   import { mapGetters } from "vuex"
   export default {
@@ -141,15 +140,17 @@
       birthdate: { required },
       about: { maxLength: maxLength(300) }
     },
-    created () { this.$store.dispatch("become/getBecome") },
+    created () {
+      this.$store.dispatch("contacts/getContacts")
+      this.$store.dispatch("become/getBecome")
+    },
     computed: {
       ...mapGetters("become", ["BECOME_EN", "BECOME_RU"]),
       getContactEmail() { return this.$store.getters["contacts/CONTACTS_EMAIL"] }
     },
     methods: {
-      createModelForm(evt) {
-        evt.preventDefault()
-        modelFormsCollection.add({
+      createModelForm() {
+        this.$store.dispatch("model_forms/createModelForm", {
           created_at: new Date(),
           name: this.name, surname: this.surname, birthdate: this.birthdate, phone: this.phone, email: this.email,
           instagram: this.instagram, height: this.height, waist: this.waist, bust: this.bust, hips: this.hips,

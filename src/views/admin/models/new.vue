@@ -27,8 +27,6 @@
 </template>
 
 <script>
-  import { storage, modelsCollection } from "@/firebase"
-  import * as firebase from "firebase/app"
   import vue2Dropzone from "vue2-dropzone"
   import "vue2-dropzone/dist/vue2Dropzone.min.css"
   let uuid = require("uuid")
@@ -59,19 +57,20 @@
         this.metadata = { contentType: "image/png" }
         //this.$refs.imgDropZone.removeFile(upload)
       },
-      async createModel() {
-        let imageRef = storage.ref().child(this.imageName)
-        await imageRef.put(this.file, this.metadata)
-        this.preview_path = await imageRef.getDownloadURL()
-        await modelsCollection.add({
-          name: this.name, surname: this.surname, birthdate: this.birthdate, gender: this.gender, phone: this.phone,
-          email: this.email, instagram: this.email, height: this.height, waist: this.waist, bust: this.bust,
-          hips: this.hips, hair: this.hair, eyes: this.eyes, about: this.about,
-          created_at: firebase.firestore.Timestamp.fromDate(new Date()),
-          preview_path: this.preview_path
-        })
-        this.$bvModal.hide("model_new")
-      }
+      // async createModel() {
+      //   let imageRef = storage.ref().child(this.imageName)
+      //   await imageRef.put(this.file, this.metadata)
+      //   this.preview_path = await imageRef.getDownloadURL()
+      //   await modelsCollection.add({
+      //     name: this.name, surname: this.surname, birthdate: this.birthdate, gender: this.gender, phone: this.phone,
+      //     email: this.email, instagram: this.email, height: this.height, waist: this.waist, bust: this.bust,
+      //     hips: this.hips, hair: this.hair, eyes: this.eyes, about: this.about,
+      //     created_at: firebase.firestore.Timestamp.fromDate(new Date()),
+      //     preview_path: this.preview_path
+      //   })
+      //   this.$bvModal.hide("model_new")
+      // }
+
     }
   }
 </script>

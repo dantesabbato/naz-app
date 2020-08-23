@@ -46,7 +46,7 @@
           return moment(date).format("DD.MM.YYYY")
         }
       },
-      passModel(model) { this.$store.dispatch('passModel', model) }
+      passModel(model) { this.$store.dispatch("passModel", model) }
     }
   }
 </script>

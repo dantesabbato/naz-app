@@ -1,5 +1,4 @@
 import { contentCollection } from '@/firebase'
-import store from "@/stores"
 
 export default {
   namespaced: true,
@@ -12,12 +11,12 @@ export default {
   },
   mutations: { setContacts(state, val) { state.contacts = val } },
   actions: {
-    async getContacts ({ state }) {
+    async getContacts ({ state, commit }) {
       if (state.contacts.length) { return }
       await contentCollection.doc("contacts").get().then(snapshot => {
         if (!snapshot.exists) return
         let data = snapshot.data()
-        store.commit('contacts/setContacts', data)
+        commit("setContacts", data)
       })
     }
   }

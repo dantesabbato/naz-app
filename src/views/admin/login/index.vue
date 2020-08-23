@@ -19,16 +19,12 @@
   export default {
     name: 'login',
     data: () => ({
-      loginForm: {
-        email: '',
-        password: ''
-      }
+      loginForm: { email: '', password: '' }
     }),
     methods: {
       login() {
         this.$store.dispatch('login', {
-          email: this.loginForm.email,
-          password: this.loginForm.password
+          email: this.loginForm.email, password: this.loginForm.password
         })
       }
     }

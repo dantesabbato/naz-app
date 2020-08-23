@@ -26,7 +26,7 @@ const routes = [
     path: "/admin",
     component: Admin,
     children: [
-      { path: "dashboard", alias: "/", name: "dashboard", component: () => import("./views/admin/dashboard") },
+      { path: "dashboard", alias: "/", name: "dashboard", component: () => import("./views/admin/model_forms") },
       { path: "models", name: "admin-models", component: () => import("./views/admin/models") },
       { path: "content", name: "admin-content", component: () => import("./views/admin/content") }
     ],
