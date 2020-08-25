@@ -78,7 +78,6 @@
 
 <script>
   import { mapState } from "vuex"
-  import { modelsCollection } from "@/firebase"
   export default {
     name: "admin_modal",
     data: () => ({
@@ -86,13 +85,16 @@
     }),
     computed: mapState(["selectedModel"]),
     methods: {
-      async updateModel() {
-        await modelsCollection.doc(this.selectedModel.id).update(this.selectedModel)
+      hideModal () {
         this.$bvModal.hide("model_edit")
       },
+      async updateModel() {
+        await this.$store.dispatch("models/updateModel", this.selectedModel)
+        this.hideModal()
+      },
       async removeModel() {
-        await modelsCollection.doc(this.selectedModel.id).delete()
-        this.$bvModal.hide("model_edit")
+        await this.$store.dispatch("models/removeModel", this.selectedModel.id)
+        this.hideModal()
       }
     }
   }

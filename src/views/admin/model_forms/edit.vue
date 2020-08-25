@@ -1,6 +1,6 @@
 <template>
   <b-modal id="model_form_modal" class="squared" size="xl" hide-header hide-footer>
-    <b-form @submit.prevent="createModel" @reset.prevent="removeModalForm">
+    <b-form @submit.prevent="createModel" @reset.prevent="removeModalForm(selectedModel.id)">
 
       <b-form-group label="Имя" label-for="name" label-cols-sm="2">
         <b-form-input id="name" v-model="selectedModel.name"/>
@@ -47,7 +47,9 @@
       </b-form-group>
 
       <b-form-group label="Пол" label-cols-sm="2">
-        <b-form-radio-group v-model="selectedModel.gender" buttons button-variant="outline-dark" :options="gender_radios"/>
+        <b-form-radio-group v-model="selectedModel.gender"
+                            buttons button-variant="outline-dark"
+                            :options="gender_radios"/>
       </b-form-group>
 
       <b-form-group label="Волосы" label-for="hair" label-cols-sm="2">
@@ -74,16 +76,12 @@
 
 <script>
   import { mapState } from 'vuex'
-  import { storage } from "@/firebase"
   import vue2Dropzone from "vue2-dropzone"
   import "vue2-dropzone/dist/vue2Dropzone.min.css"
   let uuid = require("uuid")
   export default {
     data: () => ({
-      model: null,
-      preview_path: "",
       gender_radios: [ { text: "М", value: true }, { text: "Ж", value: false } ],
-      file: null, metadata: "", imageName: "",
       dropzoneOptions: {
         url: "https://httpbin.org/post",
         thumbnailWidth: 150,
@@ -104,31 +102,16 @@
       },
       afterComplete(upload) {
         this.isLoading = true
-        this.imageName = uuid.v1()
-        this.file = upload
-        this.metadata = { contentType: "image/png" }
+        this.selectedModel.image_name = uuid.v1()
+        this.selectedModel.file = upload
         //this.$refs.imgDropZone.removeFile(upload)
       },
-      async  createModel() {
-        let imageRef = storage.ref().child(this.imageName)
-        await imageRef.put(this.file, this.metadata)
-        this.selectedModel.preview_path = await imageRef.getDownloadURL()
-        // await modelsCollection.add({
-        //   name: this.selectedModel.name, surname: this.selectedModel.surname, birthdate: this.selectedModel.birthdate,
-        //   gender: this.gender, phone: this.selectedModel.phone, email: this.selectedModel.email,
-        //   instagram: this.selectedModel.email, height: this.selectedModel.height, waist: this.selectedModel.waist,
-        //   bust: this.selectedModel.bust, hips: this.selectedModel.hips, hair: this.hair, eyes: this.eyes,
-        //   about: this.selectedModel.about,
-        //   created_at: firebase.firestore.Timestamp.fromDate(new Date()),
-        //   preview_path: this.preview_path
-        // })
-        //this.selectedModel.created_at = firebase.firestore.Timestamp.fromDate(new Date())
-        //hair: this.hair, eyes: this.eyes, gender: this.gender, preview_path: this.preview_path,
-        await this.$store.dispatch("model/createModel", this.selectedModel)
-        await this.removeModalForm()
+      async createModel() {
+        await this.$store.dispatch("models/createModel", this.selectedModel)
+        await this.removeModalForm(this.selectedModel.id)
       },
-      async removeModalForm() {
-        await this.$store.dispatch("model_forms/removeModalForm", this.selectedModel.id)
+      async removeModalForm(id) {
+        await this.$store.dispatch("model_forms/removeModelForm", id)
         this.hideModal()
       }
     }

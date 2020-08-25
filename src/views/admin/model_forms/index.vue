@@ -3,8 +3,8 @@
     <Edit/>
     <div id='model_forms' class="pt-5">
       <b-container>
-        <b-card-group>
-          <div v-for="model_form in $store.getters['model_forms/MODEL_FORMS']"
+        <b-card-group v-if="MODEL_FORMS.length">
+          <div v-for="model_form in MODEL_FORMS"
                :key='model_form.id'
           >
             <b-card class="squared border-dark shadow-lg m-2"
@@ -108,6 +108,7 @@
             </b-card>
           </div>
         </b-card-group>
+        <div v-else id="empty" class="mt-5 text-center"><v-icon name="inbox" scale="10"/><p>ПУСТО</p></div>
       </b-container>
     </div>
   </div>
@@ -116,6 +117,7 @@
 <script>
   import Edit from "./edit"
   import moment from "moment"
+  import { mapGetters } from "vuex"
   export default {
     name: 'dashboard',
     components: { Edit },
@@ -129,6 +131,7 @@
       short_format: "DD.MM.YYYY"
     }),
     created() { this.$store.dispatch("model_forms/getModelForms") },
+    computed: mapGetters("model_forms", ["MODEL_FORMS"]),
     methods: {
       getTime(time, format) {
         if (time) {

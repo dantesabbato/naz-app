@@ -5,10 +5,10 @@
     <b-container>
       <b-tabs pills>
         <b-tab title="Девушки">
-          <card-group :models="$store.getters.WOMEN"/>
+          <card-group :models="$store.getters['models/WOMEN']"/>
         </b-tab>
         <b-tab title="Парни">
-          <card-group :models="$store.getters.MEN"/>
+          <card-group :models="$store.getters['models/MEN']"/>
         </b-tab>
         <template v-slot:tabs-start>
           <b-button variant="outline-dark squared" size="md" class="mr-2" v-b-modal.model_new><v-icon name="plus"/></b-button>
@@ -25,7 +25,7 @@
   export default {
     name: 'admin_models',
     components: { Edit, New, CardGroup },
-    created() { this.$store.dispatch("getModels") }
+    created() { this.$store.dispatch("models/getModels") }
   }
 </script>
 
