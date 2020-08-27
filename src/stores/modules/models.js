@@ -2,7 +2,6 @@ import { storage, modelsCollection } from "@/firebase"
 import { firestore } from "firebase/app"
 
 export default {
-  namespaced: true,
   state: { models: [] },
   getters: {
     MEN: state => { return state.models.filter(model => model.gender) },
@@ -14,7 +13,7 @@ export default {
       if (state.models.length) { return }
       return new Promise((resolve) => {
         modelsCollection
-        .orderBy('name')
+        .orderBy("name")
         .onSnapshot(snapshot => {
           let modelArray = []
           snapshot.forEach(doc => {

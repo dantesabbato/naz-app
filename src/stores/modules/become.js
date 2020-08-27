@@ -1,7 +1,6 @@
 import { contentCollection } from '@/firebase'
 
 export default {
-  namespaced: true,
   state: { become: {} },
   getters: {
     BECOME_EN: state => { return state.become.become_en },

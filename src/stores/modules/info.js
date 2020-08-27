@@ -1,7 +1,6 @@
 import { contentCollection } from '@/firebase'
 
 export default {
-  namespaced: true,
   state: { info: {} },
   getters: {
     INFO_EN: state => { return state.info.info_en },

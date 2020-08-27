@@ -1,7 +1,6 @@
 import { contentCollection } from '@/firebase'
 
 export default {
-  namespaced: true,
   state: { contacts: {} },
   getters: {
     CONTACTS_EMAIL: state => { return state.contacts.email },

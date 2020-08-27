@@ -1,7 +1,6 @@
 import { modelFormsCollection } from "@/firebase"
 
 export default {
-  namespaced: true,
   state: { model_forms: [] },
   getters: { MODEL_FORMS: state => { return state.model_forms } },
   mutations: { setModelForms(state, val) { state.model_forms = val } },

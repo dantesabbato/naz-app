@@ -1,10 +1,14 @@
 <template>
   <div id="model" class="fade-in">
+    <b-modal id="show-image" size="xl" hide-footer hide-header>
+      <b-img :src="selectedImageURL"/>
+    </b-modal>
+
     <b-container>
       <a @click="$router.go(-1)"><v-icon name="chevron-left" scale="2"/></a>
       <b-row class="mt-4 mb-5">
         <b-col sm>
-          <img :src="model.preview_path">
+          <img :src="model.preview_path" v-b-modal.show-image @click="passImageURL(model.preview_path)">
         </b-col>
         <b-col sm align-self="center">
           <content>
@@ -30,12 +34,15 @@
     name: "model",
     resource: "model",
     props: ["id"],
-    data: () => ({ model: {} }),
+    data: () => ({ model: {}, selectedImageURL: "" }),
     created () { this.init() },
     methods: {
       async init() {
         await this.$store.dispatch("models/getModels")
         this.model = await this.$store.dispatch("models/getModel", this.id)
+      },
+      passImageURL(url) {
+        this.selectedImageURL = url
       }
     }
   }
