@@ -78,6 +78,14 @@
         label
           margin-right: 7px
 
-  #show-image
-    .modal-body
-      padding: 0 !important
+::v-deep .show-image-modal
+  overflow-y: hidden
+  .modal-dialog
+    margin: auto
+    .modal-content
+      margin: auto
+      width: fit-content
+      .modal-body
+        padding: 0
+  img
+    height: 100vh

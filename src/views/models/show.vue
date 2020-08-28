@@ -1,6 +1,6 @@
 <template>
   <div id="model" class="fade-in">
-    <b-modal id="show-image" size="xl" hide-footer hide-header>
+    <b-modal id="show-image" modal-class="show-image-modal" size="xl" hide-footer hide-header>
       <b-img :src="selectedImageURL"/>
     </b-modal>
 
