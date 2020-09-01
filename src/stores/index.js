@@ -2,12 +2,6 @@ import Vue from "vue"
 import Vuex from "vuex"
 import * as fb from "../firebase"
 import router from  "../router"
-//\\//\\//\\//\\ IMPORT MODULES //\\//\\//\\//\\
-// import become from "./modules/become"
-// import contacts from './modules/contacts'
-// import info from "./modules/info"
-// import models from "./modules/models"
-// import model_forms from "./modules/model_forms"
 import modules from "@/stores/modules"
 
 Vue.use(Vuex)

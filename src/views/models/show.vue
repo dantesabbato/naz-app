@@ -8,7 +8,13 @@
       <a @click="$router.go(-1)"><v-icon name="chevron-left" scale="2"/></a>
       <b-row class="mt-4 mb-5">
         <b-col sm>
+
+          <div v-for="photo in photo_urls" :key="photo">
+            <img :src="photo" v-b-modal.show-image @click="passImageURL(photo)">
+          </div>
+
           <img :src="model.preview_path" v-b-modal.show-image @click="passImageURL(model.preview_path)">
+
         </b-col>
         <b-col sm align-self="center">
           <content>
@@ -34,12 +40,14 @@
     name: "model",
     resource: "model",
     props: ["id"],
-    data: () => ({ model: {}, selectedImageURL: "" }),
+    data: () => ({ model: {}, photo_urls: [], selectedImageURL: "" }),
     created () { this.init() },
     methods: {
       async init() {
         await this.$store.dispatch("models/getModels")
+        await this.$store.dispatch("photos/getPhotos")
         this.model = await this.$store.dispatch("models/getModel", this.id)
+        this.photo_urls = await this.$store.dispatch("photos/getPhotosByModel", this.id)
       },
       passImageURL(url) {
         this.selectedImageURL = url
