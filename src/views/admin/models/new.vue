@@ -16,10 +16,16 @@
       <b-form-input v-model="model.eyes" placeholder="Глаза"/>
       <b-form-textarea v-model="model.about" placeholder="Дополнительное инфо"/>
       <vue-dropzone
-        ref="imgDropZone"
-        id="customdropzone"
+          ref="PreviewDropZone"
+          id="preview_dropzone"
+          :options="dropzoneOptions"
+          @vdropzone-complete="previewComplete"
+      />
+      <vue-dropzone
+        ref="PhotosDropZone"
+        id="photos_dropzone"
         :options="dropzoneOptions"
-        @vdropzone-complete="afterComplete"
+        @vdropzone-complete="photosComplete"
       />
       <b-button type="submit" variant="outline-dark" size="sm">Создать</b-button>
     </b-form>
@@ -33,8 +39,9 @@
   export default {
     data: () => ({
       model: {
-        name: "", surname: "", birthdate: "", gender: null, phone: "", email: "", instagram: "", height: "",
-        waist: "", bust: "", hips: "", hair: "", eyes: "", about: "", preview_path: "", file: null, imageName: ""
+        name: "", surname: "", birthdate: "", gender: null, phone: "", email: "", instagram: "",
+        height: "", waist: "", bust: "", hips: "", hair: "", eyes: "", about: "",
+        photos: [], preview: null, previewName: ""
       },
       gender_radios: [ { text: "М", value: true }, { text: "Ж", value: false } ],
       dropzoneOptions: {
@@ -54,11 +61,16 @@
       hideModal () {
         this.$bvModal.hide("model_new")
       },
-      afterComplete(upload) {
+      previewComplete(upload) {
         this.isLoading = true
-        this.imageName = uuid.v1()
-        this.file = upload
+        this.model.previewName = uuid.v1()
+        this.model.preview = upload
         //this.$refs.imgDropZone.removeFile(upload)
+      },
+      photosComplete(upload) {
+        this.isLoading = true
+        let fileName = uuid.v1()
+        this.model.photos.push({file: upload, file_name: fileName })
       },
       async createModel() {
         await this.$store.dispatch("models/createModel", this.model)
