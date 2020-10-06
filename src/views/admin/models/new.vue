@@ -52,9 +52,7 @@
     }),
     components: { vueDropzone: vue2Dropzone },
     methods: {
-      hideModal () {
-        this.$bvModal.hide("model_new")
-      },
+      hideModal () { this.$bvModal.hide("model_new") },
       // previewComplete(upload) {
       //   this.isLoading = true
       //   this.model.previewName = uuid.v1()

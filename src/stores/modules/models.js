@@ -27,22 +27,17 @@ export default {
       })
     },
     async createModel(context, obj) {
-      console.log(obj)
-      let imageRef = storage.ref().child(obj.previewName)
-      await imageRef.put(obj.preview, { contentType: "image/png" })
-      let preview_path = await imageRef.getDownloadURL()
       await modelsCollection.add({
         name: obj.name, surname: obj.surname, birthdate: obj.birthdate, gender: obj.gender, phone: obj.phone,
         email: obj.email, instagram: obj.email, height: obj.height, waist: obj.waist, bust: obj.bust,
-        hips: obj.hips, hair: obj.hair || "", eyes: obj.eyes || "", about: obj.about, preview_path: preview_path,
+        hips: obj.hips, hair: obj.hair || "", eyes: obj.eyes || "", about: obj.about, photos: [],
         created_at: firestore.Timestamp.fromDate(new Date())
       }).then(async docRef => {
         await Promise.all(obj.photos.map(async photo => {
-          console.log(photo)
           let photoRef = storage.ref().child(photo.file_name)
           let path = await photoRef.getDownloadURL()
           await photoRef.put(photo.file, { contentType: "image/png" })
-          await modelsCollection.add({model_id: docRef.id, url: path})
+          await modelsCollection.doc(docRef.id).update({"photos": firestore.FieldValue.arrayUnion(path) })
         }))
       })
     },
