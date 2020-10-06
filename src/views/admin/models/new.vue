@@ -16,12 +16,6 @@
       <b-form-input v-model="model.eyes" placeholder="Глаза"/>
       <b-form-textarea v-model="model.about" placeholder="Дополнительное инфо"/>
       <vue-dropzone
-          ref="PreviewDropZone"
-          id="preview_dropzone"
-          :options="dropzoneOptions"
-          @vdropzone-complete="previewComplete"
-      />
-      <vue-dropzone
         ref="PhotosDropZone"
         id="photos_dropzone"
         :options="dropzoneOptions"
@@ -61,12 +55,12 @@
       hideModal () {
         this.$bvModal.hide("model_new")
       },
-      previewComplete(upload) {
-        this.isLoading = true
-        this.model.previewName = uuid.v1()
-        this.model.preview = upload
-        //this.$refs.imgDropZone.removeFile(upload)
-      },
+      // previewComplete(upload) {
+      //   this.isLoading = true
+      //   this.model.previewName = uuid.v1()
+      //   this.model.preview = upload
+      //   //this.$refs.imgDropZone.removeFile(upload)
+      // },
       photosComplete(upload) {
         this.isLoading = true
         let fileName = uuid.v1()

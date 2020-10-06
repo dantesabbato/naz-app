@@ -10,7 +10,7 @@
         <b-tab title="Парни">
           <card-group :models="$store.getters['models/MEN']"/>
         </b-tab>
-        <template v-slot:tabs-start>
+        <template #tabs-start>
           <b-button variant="outline-dark squared" size="md" class="mr-2" v-b-modal.model_new><v-icon name="plus"/></b-button>
         </template>
       </b-tabs>

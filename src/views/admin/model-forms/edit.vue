@@ -111,7 +111,7 @@
         await this.removeModalForm(this.selectedModel.id)
       },
       async removeModalForm(id) {
-        await this.$store.dispatch("model_forms/removeModelForm", id)
+        await this.$store.dispatch("model-forms/removeModelForm", id)
         this.hideModal()
       }
     }

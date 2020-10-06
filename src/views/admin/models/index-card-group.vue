@@ -1,8 +1,8 @@
 <template>
   <b-card-group deck>
-    <div v-for='model in models' :key='model.id'>
+    <div v-for="model in models" :key="model.id">
       <b-card class="shadow-lg squared"
-              :img-src='model.preview_path'
+              :img-src="model.photos[0]"
               img-left bg-variant="dark"
               text-variant="white"
               @click="passModel(model)"

@@ -130,8 +130,8 @@
       full_format: "DD.MM.YYYY hh:mm",
       short_format: "DD.MM.YYYY"
     }),
-    created() { this.$store.dispatch("model_forms/getModelForms") },
-    computed: mapGetters("model_forms", ["MODEL_FORMS"]),
+    created() { this.$store.dispatch("model-forms/getModelForms") },
+    computed: mapGetters("model-forms", ["MODEL_FORMS"]),
     methods: {
       getTime(time, format) {
         if (time) {
@@ -140,7 +140,7 @@
         }
       },
       passModel(model_form) { this.$store.dispatch("passModel", model_form) },
-      removeModelForm(id) { this.$store.dispatch("model_forms/removeModelForm", id) }
+      removeModelForm(id) { this.$store.dispatch("model-forms/removeModelForm", id) }
     }
   }
 </script>

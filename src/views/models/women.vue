@@ -5,7 +5,7 @@
                    :key="model.id"
                    :to="{ name: 'model', params: { id: model.id } }"
       >
-        <b-card :img-src="model.preview_path"
+        <b-card :img-src="model.photos[0]"
                 img-top
                 class="border-0"
         >

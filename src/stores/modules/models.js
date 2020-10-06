@@ -1,4 +1,4 @@
-import { storage, modelsCollection, photosCollection } from "@/firebase"
+import { storage, modelsCollection } from "@/firebase"
 import { firestore } from "firebase/app"
 
 export default {
@@ -42,14 +42,15 @@ export default {
           let photoRef = storage.ref().child(photo.file_name)
           let path = await photoRef.getDownloadURL()
           await photoRef.put(photo.file, { contentType: "image/png" })
-          await photosCollection.add({model_id: docRef.id, url: path})
+          await modelsCollection.add({model_id: docRef.id, url: path})
         }))
       })
     },
-    getModel({ state }, id) {
-      return state.models.find( model => model.id === id )
-    },
+    getModel({ state }, id) { return state.models.find( model => model.id === id ) },
     async updateModel(context, obj) { await modelsCollection.doc(obj.id).update(obj) },
-    async removeModel(context, id) { await modelsCollection.doc(id).delete() }
+    async removeModel(context, id) { await modelsCollection.doc(id).delete() },
+    async removePhoto(context, obj) {
+      await modelsCollection.doc(obj.id).update({ "photos": firestore.FieldValue.arrayRemove(obj.photo) })
+    }
   }
 }

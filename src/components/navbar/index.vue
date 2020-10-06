@@ -1,7 +1,7 @@
 <template>
   <b-navbar toggleable="lg">
     <b-navbar-toggle target="nav-collapse">
-      <template v-slot:default="{ expanded }">
+      <template #default="{ expanded }">
         <v-icon v-if="expanded" name="times" scale="2" class="white"/>
         <v-icon v-else name="bars" scale="2" class="black"/>
       </template>

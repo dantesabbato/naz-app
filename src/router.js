@@ -16,7 +16,7 @@ const routes = [
     children: [
       { path: "/become_naz", name: "become", component: () => import("./views/become") },
       { path: "/contacts", name: "contacts", component: () => import("./views/contacts") },
-      { path: "/info", name: 'info', component: () => import("./views/info") },
+      { path: "/info", name: 'info', component: () => import("./views/info/index") },
       { path: "/men", name: "men", component: () => import("./views/models/men") },
       { path: "/women", name: "women", component: () => import("./views/models/women") },
       { path: "/model/:id", name: "model", props: true, component: () => import("./views/models/show") }
@@ -26,7 +26,7 @@ const routes = [
     path: "/admin",
     component: Admin,
     children: [
-      { path: "dashboard", alias: "/", name: "dashboard", component: () => import("./views/admin/model_forms") },
+      { path: "dashboard", alias: "/", name: "dashboard", component: () => import("./views/admin/model-forms") },
       { path: "models", name: "admin-models", component: () => import("./views/admin/models") },
       { path: "content", name: "admin-content", component: () => import("./views/admin/content") }
     ],

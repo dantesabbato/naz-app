@@ -150,7 +150,7 @@
     },
     methods: {
       createModelForm() {
-        this.$store.dispatch("model_forms/createModelForm", {
+        this.$store.dispatch("model-forms/createModelForm", {
           created_at: new Date(),
           name: this.name, surname: this.surname, birthdate: this.birthdate, phone: this.phone, email: this.email,
           instagram: this.instagram, height: this.height, waist: this.waist, bust: this.bust, hips: this.hips,

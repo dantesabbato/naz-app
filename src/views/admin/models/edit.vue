@@ -1,10 +1,16 @@
 <template>
-  <b-modal id='model_edit' size='xl' hide-footer hide-header>
+  <b-modal id="model_edit" size="xl" hide-footer hide-header>
     <b-row>
-      <b-col md='auto'>
-        <img :src='selectedModel.preview_path'>
+      <b-col md="auto">
+        <div class="photo" v-for="photo in selectedModel.photos" :key="photo">
+          <img :src="photo">
+          <b-button-group class="menu" vertical>
+            <b-button variant="outline-danger" squared @click="removePhoto(photo)">Удалить</b-button>
+            <b-button variant="outline-dark" squared>Установить как превью</b-button>
+          </b-button-group>
+        </div>
       </b-col>
-      <b-col align-self='center'>
+      <b-col align-self="center">
         <label>Дата добавления</label><div>{{ selectedModel.created_at }}</div>
         <b-form @submit.prevent="updateModel">
 
@@ -95,6 +101,9 @@
       async removeModel() {
         await this.$store.dispatch("models/removeModel", this.selectedModel.id)
         this.hideModal()
+      },
+      async removePhoto(photo) {
+        await this.$store.dispatch("models/removePhoto", { id: this.selectedModel.id, photo: photo } )
       }
     }
   }
