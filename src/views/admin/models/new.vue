@@ -34,8 +34,7 @@
     data: () => ({
       model: {
         name: "", surname: "", birthdate: "", gender: null, phone: "", email: "", instagram: "",
-        height: "", waist: "", bust: "", hips: "", hair: "", eyes: "", about: "",
-        photos: [], preview: null, previewName: ""
+        height: "", waist: "", bust: "", hips: "", hair: "", eyes: "", about: "", photos: []
       },
       gender_radios: [ { text: "М", value: true }, { text: "Ж", value: false } ],
       dropzoneOptions: {
@@ -53,16 +52,10 @@
     components: { vueDropzone: vue2Dropzone },
     methods: {
       hideModal () { this.$bvModal.hide("model_new") },
-      // previewComplete(upload) {
-      //   this.isLoading = true
-      //   this.model.previewName = uuid.v1()
-      //   this.model.preview = upload
-      //   //this.$refs.imgDropZone.removeFile(upload)
-      // },
       photosComplete(upload) {
         this.isLoading = true
         let fileName = uuid.v1()
-        this.model.photos.push({file: upload, file_name: fileName })
+        this.model.photos.push({ file: upload, file_name: fileName })
       },
       async createModel() {
         await this.$store.dispatch("models/createModel", this.model)

@@ -17,9 +17,20 @@
             <li v-if="model.hair"><label>Hair</label><b>{{ model.hair }}</b></li>
             <li v-if="model.eyes"><label>Eyes</label><b>{{ model.eyes }}</b></li>
           </ul>
-          <a class="back" @click="$router.go(-1)"><v-icon name="chevron-left" scale="2"/></a>
-          <v-icon v-if="model.instagram" name="brands/instagram" scale="2"/>
-          <a class="print"><v-icon name="file-pdf" scale="2"/></a>
+          <b-form-radio-group id="radios" :options="measurements" v-model="selectedMeasurement" buttons/>
+          <b-nav fill class="mt-4">
+            <b-nav-item>
+<!--              <a class="back" @click="$router.go(-1)"><v-icon name="chevron-left" scale="2"/></a>-->
+              <a class="back" @click="$router.go(-1)"><b-icon icon="chevron-left" font-scale="0.9"/></a>
+            </b-nav-item>
+            <b-nav-item>
+              <v-icon v-if="model.instagram" name="brands/instagram" scale="2"/>
+            </b-nav-item>
+            <b-nav-item>
+<!--              <a class="print"><v-icon name="file-pdf" scale="2"/></a>-->
+              <a class="print"><div class="text"/><b-icon icon="chevron-bar-down" font-scale="0.9"/></a>
+            </b-nav-item>
+          </b-nav>
         </div>
       </div>
 
@@ -35,7 +46,15 @@
     name: "model",
     resource: "model",
     props: ["id"],
-    data: () => ({ model: {}, selectedImageURL: "" }),
+    data: () => ({
+      model: {},
+      selectedImageURL: "",
+      selectedMeasurement: "cm",
+      measurements: [
+        { text: "CM", value: "cm" },
+        { text: "IN", value: "in" }
+      ]
+    }),
     created () { this.init() },
     methods: {
       async init() {

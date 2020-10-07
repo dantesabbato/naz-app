@@ -2,7 +2,8 @@
 import "vue-awesome/icons"
 import "bootstrap/dist/css/bootstrap.css"
 import "bootstrap-vue/dist/bootstrap-vue.css"
-import BootstrapVue from "bootstrap-vue"
+
+import { BootstrapVue, BootstrapVueIcons } from "bootstrap-vue"
 import Vicon from "vue-awesome/components/Icon"
 import Vue from "vue"
 import Vuelidate from "vuelidate"
@@ -22,6 +23,7 @@ Vue.component("admin-layout", Admin)
 Vue.component("main-layout", Main)
 Vue.component("v-icon", Vicon)
 Vue.use(BootstrapVue)
+Vue.use(BootstrapVueIcons)
 Vue.use(Vuelidate)
 
 let app

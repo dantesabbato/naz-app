@@ -23,11 +23,27 @@
 
 //\\//\\//\\//\\ SHOW //\\//\\//\\//\\
 #model
+  .block
+    float: left
+    height: 610px
+    width: 50%
+    position: relative
+    img
+      height: 600px
+      margin: 5px
+      object-fit: cover
+      width: calc(100% - (5px * 2))
+
   .info
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    width: 400px
     p
-      letter-spacing: 10px
+      letter-spacing: 12px
       text-transform: uppercase
-      font-size: 5em
+      font-size: 4em
       text-align: center
       @media all and (max-width: $phone )
         font-size: 2.5em
@@ -42,10 +58,7 @@
           margin-right: 7px
     a
       color: black
-      font-size: 2rem
-      font-weight: bold
-      margin: 15px
-      padding-bottom: 15px
+      font-size: 1.8rem
       cursor: pointer
       text-decoration: none
       z-index: 1
@@ -56,21 +69,38 @@
         position: absolute
         top: 1%
         left: 2%
-      svg
-        margin-right: 5px
-    .back
-      &:after
-        @media all and (max-width: $desktop )
-          content: "back"
-        @media all and (max-width: $phone )
-          content: ""
-
+    .back:after
+      @media all and (max-width: $desktop )
+        content: "back"
+      @media all and (max-width: $phone )
+        content: ""
     .print
-      &:after
-        @media all and (max-width: $desktop )
-          content: "print"
-        @media all and (max-width: $phone )
-          content: ""
+      *
+        display: inline
+      .text
+        padding-right: 10px
+        &:after
+          @media all and (max-width: $desktop )
+            content: "print"
+          @media all and (max-width: $phone )
+            content: ""
+    #radios
+      display: table
+      margin: 0 auto
+      .btn
+        background-color: white
+        color: black
+        font-size: 1em
+        font-weight: bold
+        line-height: 0.5
+        padding-right: 10px
+        padding-left: 10px
+        &.active
+          background-color: black
+          color: white
+          &.focus
+            -webkit-box-shadow: none !important
+            box-shadow: none  !important
 
   .col, .col-md-auto, .col-sm
     padding: 0
@@ -79,16 +109,6 @@
     font-family: 'Cedra4F'
   .modal-body
     padding: 0
-
-  .block
-    float: left
-    height: 100%
-    width: 50%
-    img
-      height: 600px
-      margin: 5px
-      object-fit: cover
-      width: calc(100% - (5px * 2))
 
   ::v-deep .modal
     overflow-y: hidden

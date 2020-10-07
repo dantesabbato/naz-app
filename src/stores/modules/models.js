@@ -35,8 +35,8 @@ export default {
       }).then(async docRef => {
         await Promise.all(obj.photos.map(async photo => {
           let photoRef = storage.ref().child(photo.file_name)
-          let path = await photoRef.getDownloadURL()
           await photoRef.put(photo.file, { contentType: "image/png" })
+          let path = await photoRef.getDownloadURL()
           await modelsCollection.doc(docRef.id).update({"photos": firestore.FieldValue.arrayUnion(path) })
         }))
       })
