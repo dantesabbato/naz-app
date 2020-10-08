@@ -1,9 +1,5 @@
 <template>
   <div id="model" class="fade-in">
-<!--    <b-modal id="show-image" modal-class="modal" size="xl" hide-footer hide-header>-->
-<!--      <b-img :src="selectedImageURL"/>-->
-<!--    </b-modal>-->
-
     <b-container>
       <div class="block">
         <div class="info">
@@ -31,7 +27,6 @@
           </b-nav>
         </div>
       </div>
-
       <div class="block" v-for="photo in model.photos" :key="photo">
         <img :src="photo" v-b-modal.show-image @click="passImageURL(photo)">
       </div>
@@ -46,8 +41,6 @@
     props: ["id"],
     data: () => ({
       model: {},
-      model_in: {},
-      // selectedImageURL: "",
       selectedMeasurement: "cm",
       measurements: [
         { text: "CM", value: "cm" },
@@ -82,9 +75,6 @@
           return value
         }
       }
-      // passImageURL(url) {
-      //   this.selectedImageURL = url
-      // }
     }
   }
 </script>
