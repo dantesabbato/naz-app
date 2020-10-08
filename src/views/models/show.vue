@@ -19,16 +19,14 @@
           </ul>
           <b-form-radio-group id="radios" :options="measurements" v-model="selectedMeasurement" buttons/>
           <b-nav fill class="mt-4">
-            <b-nav-item>
-<!--              <a class="back" @click="$router.go(-1)"><v-icon name="chevron-left" scale="2"/></a>-->
-              <a class="back" @click="$router.go(-1)"><b-icon icon="chevron-left" font-scale="0.9"/></a>
+            <b-nav-item class="back" @click="$router.go(-1)">
+              <b-icon icon="chevron-left" font-scale="0.9"/>
             </b-nav-item>
-            <b-nav-item>
-              <v-icon v-if="model.instagram" name="brands/instagram" scale="2"/>
+            <b-nav-item v-if="model.instagram" :href="'https://www.instagram.com/' + model.instagram">
+              <v-icon name="brands/instagram" scale="2"/>
             </b-nav-item>
-            <b-nav-item>
-<!--              <a class="print"><v-icon name="file-pdf" scale="2"/></a>-->
-              <a class="print"><div class="text"/><b-icon icon="chevron-bar-down" font-scale="0.9"/></a>
+            <b-nav-item class="print">
+              <div class="text"/><b-icon icon="chevron-bar-down" font-scale="0.9"/>
             </b-nav-item>
           </b-nav>
         </div>

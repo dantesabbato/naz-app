@@ -35,7 +35,7 @@ const routes = [
   { path: "/login", name: "login", component: () => import("./views/admin/login") },
   { path: "/facebook", beforeEnter () { location.href = "https://m.facebook.com/nazmanagement" } },
   { path: "/vk", beforeEnter () { location.href = "https://vk.com/nazmgmt" } },
-  { path: "/instagram", beforeEnter () { location.href = "https://www.instagram.com/nazmanagement/?igshid=1vpi9q3ljuvh7" } }
+  { path: "/instagram", beforeEnter () { location.href = "https://www.instagram.com/nazmanagement" } }
 ]
 
 const router = new Router({
