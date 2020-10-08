@@ -1,18 +1,18 @@
 <template>
   <div id="model" class="fade-in">
-    <b-modal id="show-image" modal-class="modal" size="xl" hide-footer hide-header>
-      <b-img :src="selectedImageURL"/>
-    </b-modal>
+<!--    <b-modal id="show-image" modal-class="modal" size="xl" hide-footer hide-header>-->
+<!--      <b-img :src="selectedImageURL"/>-->
+<!--    </b-modal>-->
 
     <b-container>
       <div class="block">
         <div class="info">
           <p>{{ model.name }}</p>
           <ul>
-            <li v-if="model.height"><label>Height</label><b>{{ model.height }}</b></li>
-            <li v-if="model.bust"><label>Bust</label><b>{{ model.bust }}</b></li>
-            <li v-if="model.waist"><label>Waist</label><b>{{ model.waist }}</b></li>
-            <li v-if="model.hips"><label>Hips</label><b>{{ model.hips }}</b></li>
+            <li v-if="model.height"><label>Height</label><b>{{ model_height }}</b></li>
+            <li v-if="model.bust"><label>Bust</label><b>{{ model_bust }}</b></li>
+            <li v-if="model.waist"><label>Waist</label><b>{{ model_waist }}</b></li>
+            <li v-if="model.hips"><label>Hips</label><b>{{ model_hips }}</b></li>
             <li v-if="model.shoe"><label>Shoe</label><b>{{ model.shoe }}</b></li>
             <li v-if="model.hair"><label>Hair</label><b>{{ model.hair }}</b></li>
             <li v-if="model.eyes"><label>Eyes</label><b>{{ model.eyes }}</b></li>
@@ -46,7 +46,8 @@
     props: ["id"],
     data: () => ({
       model: {},
-      selectedImageURL: "",
+      model_in: {},
+      // selectedImageURL: "",
       selectedMeasurement: "cm",
       measurements: [
         { text: "CM", value: "cm" },
@@ -54,14 +55,36 @@
       ]
     }),
     created () { this.init() },
+    computed: {
+      model_height: function () {
+        if (this.selectedMeasurement === "in") {
+          let realFeet = this.model.height * 0.393700 / 12
+          let feet = Math.floor(realFeet)
+          let inches = Math.round((realFeet - feet) * 12)
+          return feet + "' " + inches + "\""
+        } else {
+          return this.model.height
+        }
+      },
+      model_bust: function () { return this.getInches(this.model.bust) },
+      model_waist: function () { return this.getInches(this.model.waist) },
+      model_hips: function () { return this.getInches(this.model.hips) }
+    },
     methods: {
       async init() {
         await this.$store.dispatch("models/getModels")
         this.model = await this.$store.dispatch("models/getModel", this.id)
       },
-      passImageURL(url) {
-        this.selectedImageURL = url
+      getInches(value) {
+        if (this.selectedMeasurement === "in") {
+          return Math.round(value * 0.393700) + "\""
+        } else {
+          return value
+        }
       }
+      // passImageURL(url) {
+      //   this.selectedImageURL = url
+      // }
     }
   }
 </script>
