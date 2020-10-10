@@ -1,36 +1,36 @@
-.navbar
-  font-family: 'Cedra4F'
+#navbar
+  font-family: "Cedra4F"
   font-size: 2rem
-  ul
-    width: 100%
-    li
-      padding: 0 12px
-      a:hover
-        text-decoration: underline
-
-@media all and (max-width: $phone )
-  .navbar
-    background-color: #000000d1
+  .navbar-collapse
+    .navbar-nav
+      width: 100%
+      .nav-item
+        padding: 0 12px
+        a:hover
+          text-decoration: underline
+  @media all and (max-width: $phone )
+    background-color: black
     box-shadow: 0 0 10px rgba(0,0,0,0.5)
     font-size: 1.5rem
     padding: 0
     position: fixed
     text-align: center
-    top: 0
+    top: 70px
     width: 100%
     z-index: 1
-  .nav-item
-    a
-      color: white!important
+    .navbar-nav
+      padding-bottom: 10px
+      .nav-item .nav-link
+        color: white
 
-.navbar-toggler
-  border: none
-  color: black !important
-  font-size: 27px
-  position: fixed!important
-  right: 1%
-  top: 6px
-  z-index: 1
-  svg
-    -webkit-filter: drop-shadow( 1px 1px 2px white )
-    filter: drop-shadow( -1px 1px 2px white )
+  .navbar-toggler
+    border: none
+    color: black !important
+    font-size: 27px
+    position: fixed!important
+    right: 1%
+    top: 12px
+    z-index: 1
+
+  .back-phone
+    left: 0

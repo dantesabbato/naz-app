@@ -25,9 +25,14 @@
 #model
   .block
     float: left
+    position: relative
     height: 610px
     width: 50%
-    position: relative
+    @media all and (max-width: $phone )
+      width: 100%
+    &:first-child
+      @media all and (max-width: $phone )
+        height: 400px
     img
       height: 600px
       margin: 5px
@@ -35,11 +40,13 @@
       width: calc(100% - (5px * 2))
 
   .info
+    width: 400px
     position: absolute
+    transform: translate(-50%, -50%)
     top: 50%
     left: 50%
-    transform: translate(-50%, -50%)
-    width: 400px
+    @media all and (max-width: $phone )
+      width: auto
     p
       letter-spacing: 12px
       text-transform: uppercase
@@ -62,18 +69,16 @@
       cursor: pointer
       text-decoration: none
       z-index: 1
+
+    .back
       @media all and (max-width: $phone )
-        font-size: 1rem
-      @media all and (max-width: $phone )
-        margin: 0
-        position: absolute
-        top: 1%
-        left: 2%
-    .back a:after
-      @media all and (max-width: $desktop )
-        content: "back"
-      @media all and (max-width: $phone )
-        content: ""
+        display: none
+      a:after
+        @media all and (max-width: $desktop )
+          content: "back"
+        @media all and (max-width: $phone )
+          content: ""
+
     .print
       *
         display: inline

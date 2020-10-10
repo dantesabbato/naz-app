@@ -1,16 +1,18 @@
 <template>
   <div id="home" class="fade-in">
-    <logo>NAZ</logo>
-    <sublogo>model management</sublogo>
-    <Navbar/>
+    <div class="logo">NAZ</div>
+    <div class="sublogo">model management</div>
+    <b-navbar>
+      <Nav/>
+    </b-navbar>
   </div>
 </template>
 
 <script>
-  import Navbar from "../../components/navbar/index"
+  import Nav from "../../components/navbar/nav"
   export default {
     name: "home",
-    components: { Navbar }
+    components: { Nav }
   }
 </script>
 

@@ -1,9 +1,25 @@
+//.back-phone
+//  display: none
+//  @media all and (max-width: $phone )
+//    display: block
+//    position: fixed
+//    top: 10px
+//    left: 2%
+//    z-index: 1
 #logo
-  font-family: 'OmniumTagline'
+  cursor: pointer
+  font-family: "OmniumTagline"
   font-size: 6rem
   height: 95px
-  cursor: pointer
+  @media all and (max-width: $phone )
+    background-color: black
+    color: white
+    font-size: 3rem
+    height: auto
+    position: fixed
+    width: 100vw
+    z-index: 1
 #content
   padding-top: 3%
   @media all and (max-width: $phone )
-    padding-top: 10%
+    padding-top: 100px

@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="block" v-for="photo in model.photos" :key="photo">
-        <img :src="photo" v-b-modal.show-image @click="passImageURL(photo)">
+        <img :src="photo">
       </div>
     </b-container>
   </div>

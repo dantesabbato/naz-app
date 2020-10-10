@@ -1,22 +1,20 @@
 <template>
-  <div id='default'>
-    <div id='logo' align='center' v-on:click='gotoHome'>NAZ</div>
+  <div id="default">
+    <div id="logo" align="center" @click="gotoHome">NAZ</div>
     <Navbar/>
-    <div id='content'>
+    <div id="content">
       <router-view/>
     </div>
   </div>
 </template>
 
 <script>
-  import Navbar from '../../components/navbar'
+  import Navbar from "../../components/navbar"
   export default {
-    name: 'default',
+    name: "default",
     components: { Navbar },
     methods: {
-      gotoHome () {
-        window.location.href = '/'
-      }
+      gotoHome () { window.location.href = "/" }
     }
   }
 </script>
