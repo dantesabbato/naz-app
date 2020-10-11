@@ -22,7 +22,8 @@
               <v-icon name="brands/instagram" scale="2"/>
             </b-nav-item>
             <b-nav-item class="print">
-              <div class="text"/><b-icon icon="chevron-bar-down" font-scale="0.9"/>
+              <div class="print-desktop"><div class="text"/><b-icon icon="chevron-bar-down" font-scale="0.9"/></div>
+              <v-icon class="print-phone" name="regular/file-pdf" scale="1.8"/>
             </b-nav-item>
           </b-nav>
         </div>

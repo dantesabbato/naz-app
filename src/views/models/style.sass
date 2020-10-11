@@ -82,13 +82,18 @@
     .print
       *
         display: inline
-      .text
-        padding-right: 10px
-        &:after
-          @media all and (max-width: $desktop )
+      &-desktop
+        .text
+          padding-right: 10px
+          &:after
             content: "print"
-          @media all and (max-width: $phone )
-            content: ""
+        @media all and (max-width: $phone )
+          display: none
+      &-phone
+        display: none
+        @media all and (max-width: $phone )
+          display: block
+
     #radios
       display: table
       margin: 0 auto

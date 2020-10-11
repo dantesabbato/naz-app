@@ -1,121 +1,116 @@
 <template>
   <div id="become" class="fade-in">
-    <b-row>
-      <b-col lg>
-        <b-form id="become-form" @submit.prevent="createModelForm" v-if="show_form">
-          <b-row>
+    <b-form id="become-form" @submit.prevent="createModelForm" v-if="show_form">
+      <b-row>
 
-            <b-col lg>
-              <span v-if="$v.name.$error">
-                <template v-if="!$v.name.required">
-                  Введите имя
-                </template>
-                <template v-else-if="!$v.name.maxLength">
-                  Длина не должна превышать {{ $v.name.$params.maxLength.max }} символов
-                </template>
-                <template v-else-if="!$v.name.alpha">
-                  Имя должно содержать только буквы
-                </template>
-                <template v-else>
-                  Имя обязательно для заполнения
-                </template>
-              </span>
-              <b-form-input v-model.trim="name" placeholder="Name / Имя" @blur="$v.name.$touch()"/>
-            </b-col>
+        <b-col lg>
+          <span v-if="$v.name.$error">
+            <template v-if="!$v.name.required">
+              Введите имя
+            </template>
+            <template v-else-if="!$v.name.maxLength">
+              Длина не должна превышать {{ $v.name.$params.maxLength.max }} символов
+            </template>
+            <template v-else-if="!$v.name.alpha">
+              Имя должно содержать только буквы
+            </template>
+            <template v-else>
+              Имя обязательно для заполнения
+            </template>
+          </span>
+          <b-form-input v-model.trim="name" placeholder="Name / Имя" @blur="$v.name.$touch()"/>
+        </b-col>
 
-            <b-col lg>
-              <b-form-input v-model="surname" placeholder="Surname / Фамилия"/>
-            </b-col>
+        <b-col lg>
+          <b-form-input v-model="surname" placeholder="Surname / Фамилия"/>
+        </b-col>
 
-          </b-row>
-          <b-row>
+      </b-row>
+      <b-row>
 
-            <b-col lg>
-              <span v-if="$v.email.$error">
-                <template v-if="!$v.email.email">Введите email</template>
-              </span>
-              <b-form-input v-model="email" placeholder="Email" type="email" @blur="$v.email.$touch()"/>
-            </b-col>
+        <b-col lg>
+          <span v-if="$v.email.$error">
+            <template v-if="!$v.email.email">Введите email</template>
+          </span>
+          <b-form-input v-model="email" placeholder="Email" type="email" @blur="$v.email.$touch()"/>
+        </b-col>
 
-            <b-col lg>
-              <span v-if="$v.phone.$error">
-                Введите номер телефона
-              </span>
-              <b-form-input v-model="phone" placeholder="Mobile / Телефон" type="tel" @blur="$v.phone.touch()"/>
-            </b-col>
+        <b-col lg>
+          <span v-if="$v.phone.$error">
+            Введите номер телефона
+          </span>
+          <b-form-input v-model="phone" placeholder="Mobile / Телефон" type="tel" @blur="$v.phone.touch()"/>
+        </b-col>
 
-          </b-row>
-          <b-row>
+      </b-row>
+      <b-row>
 
-            <b-col lg>
-              <span v-if="$v.birthdate.$error">
-                Укажите дату рождения
-              </span>
-              <b-form-datepicker id="become-form-datepicker"
-                                 v-model="birthdate"
-                                 placeholder="Дата рождения"
-                                 @blur="$v.birthdate.$touch()"
-              />
-            </b-col>
+        <b-col lg>
+          <span v-if="$v.birthdate.$error">
+            Укажите дату рождения
+          </span>
+          <b-form-datepicker id="become-form-datepicker"
+                             v-model="birthdate"
+                             placeholder="Birth date / Дата рождения"
+                             @blur="$v.birthdate.$touch()"
+          />
+        </b-col>
 
-            <b-col lg>
-              <b-form-input v-model="instagram" placeholder="Instagram"/>
-            </b-col>
+        <b-col lg>
+          <b-form-input v-model="instagram" placeholder="Instagram"/>
+        </b-col>
 
-          </b-row>
-          <b-row>
+      </b-row>
+      <b-row>
 
-            <b-col lg>
-              <b-form-input v-model="height" placeholder="Height / Рост" type="number"/>
-            </b-col>
+        <b-col lg>
+          <b-form-input v-model="height" placeholder="Height / Рост" type="number"/>
+        </b-col>
 
-            <b-col lg>
-              <b-form-input v-model="waist" placeholder="Waist / Талия"/>
-            </b-col>
+        <b-col lg>
+          <b-form-input v-model="waist" placeholder="Waist / Талия"/>
+        </b-col>
 
-            <b-col lg>
-              <b-form-input v-model="bust" placeholder="Bust / Грудь"/>
-            </b-col>
+        <b-col lg>
+          <b-form-input v-model="bust" placeholder="Bust / Грудь"/>
+        </b-col>
 
-            <b-col lg>
-              <b-form-input v-model="hips" placeholder="Hips / Бёдра"/>
-            </b-col>
+        <b-col lg>
+          <b-form-input v-model="hips" placeholder="Hips / Бёдра"/>
+        </b-col>
 
-          </b-row>
-          <b-row>
+      </b-row>
+      <b-row>
 
-            <b-col lg>
-              <span v-if="$v.about.$error">
-                <template v-if="!$v.about.maxLength">
-                  Длина текста не долна превышать 300 символов
-                </template>
-              </span>
-              <b-form-textarea v-model="about"
-                               rows="4"
-                               placeholder="Tell us more about yourself / Расскажите о себе"
-                               @blur="$v.about.$touch()"
-              />
-              <b-button id="become-form-button" type="submit" :disabled="$v.$invalid" squared>
-                Send / Отправить
-              </b-button>
-            </b-col>
+        <b-col lg>
+          <span v-if="$v.about.$error">
+            <template v-if="!$v.about.maxLength">
+              Длина текста не долна превышать 300 символов
+            </template>
+          </span>
+          <b-form-textarea v-model="about"
+                           rows="4"
+                           placeholder="Tell us more about yourself / Расскажите о себе"
+                           @blur="$v.about.$touch()"
+          />
+          <b-button id="become-form-button" type="submit" :disabled="$v.$invalid" squared>
+            Send / Отправить
+          </b-button>
+        </b-col>
 
-          </b-row>
-        </b-form>
-        <div v-if="show_gratitude">
-          Thank you for your interest in our project and we're looking forward to seeing you. We'll call you back later!
-          Благодарим за интерес к нашему проекту и надеемся на наше дальнейшее сотрудничество. Мы свяжемся с вами позже!
-        </div>
-      </b-col>
+      </b-row>
+    </b-form>
 
-      <b-col lg>
-        <div id="become-info">
-          <p>{{ BECOME_EN }}</p><a :href="`mailto:${ getContactEmail }`">{{ getContactEmail }}</a>
-          <p>{{ BECOME_RU }}</p><a :href="`mailto:${ getContactEmail }`">{{ getContactEmail }}</a>
-        </div>
-      </b-col>
+    <div v-if="show_gratitude">
+      Thank you for your interest in our project and we're looking forward to seeing you. We'll call you back later!
+      Благодарим за интерес к нашему проекту и надеемся на наше дальнейшее сотрудничество. Мы свяжемся с вами позже!
+    </div>
 
-    </b-row>
+    <div id="become-info">
+      <div class="text">{{ BECOME_EN }}</div><a class="font-weight-bold" :href="`mailto:${ getContactEmail }`">{{ getContactEmail }}</a>
+      <div class="text">{{ BECOME_RU }}</div><a class="font-weight-bold" :href="`mailto:${ getContactEmail }`">{{ getContactEmail }}</a>
+    </div>
+
   </div>
 </template>
 
@@ -164,4 +159,4 @@
   }
 </script>
 
-<style lang="sass" scoped>@import "style"</style>
+<style lang="sass">@import "style"</style>
