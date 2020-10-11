@@ -38,6 +38,9 @@
       margin: 5px
       object-fit: cover
       width: calc(100% - (5px * 2))
+      @media all and (max-width: $phone )
+        margin: 0
+        width: 100vw
 
   .info
     width: 400px
@@ -114,21 +117,8 @@
 
   .col, .col-md-auto, .col-sm
     padding: 0
-  //.modal-content
-  //  border-radius: 0
-  //  font-family: 'Cedra4F'
-  //.modal-body
-  //  padding: 0
-  //
-  //::v-deep .modal
-  //  overflow-y: hidden
-  //  &-dialog
-  //    margin: auto
-  //    &-content
-  //      margin: auto
-  //      width: fit-content
-  //      &-body
-  //        padding: 0
-  //  img
-  //    height: 100vh
+
+  .container
+    @media all and (max-width: $phone )
+      padding: 0
 //\\//\\//\\//\\//\\//\\//\\//\\/\\//\\
