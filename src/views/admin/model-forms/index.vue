@@ -3,24 +3,24 @@
     <Edit/>
     <div id='model_forms' class="pt-5">
       <b-container>
-        <b-card-group v-if="MODEL_FORMS.length">
-          <div v-for="model_form in MODEL_FORMS"
-               :key='model_form.id'
+        <b-card-group v-if="FORMS.length">
+          <div v-for="form in FORMS"
+               :key='form.id'
           >
             <b-card class="squared border-dark shadow-lg m-2"
                     v-b-modal.model_form_modal
-                    @click="passModel(model_form)"
+                    @click="passModel(form)"
             >
               <b-card-body>
-                <b-button @click="removeModelForm(model_form.id)"><v-icon name="times" scale="1.3"/></b-button>
+                <b-button @click="removeForm(form.id)"><v-icon name="times" scale="1.3"/></b-button>
                 <b-form-group label-cols-sm="3"
-                              :label="getTime(model_form.created_at, full_format)"
+                              :label="getTime(form.created_at, full_format)"
                               label-for="name"
                               label-align="left"
                               label-size="sm"
                 >
                   <div id="name" class="text-uppercase font-weight-bold">
-                    {{ model_form.name + " " + model_form.surname }}
+                    {{ form.name + " " + form.surname }}
                   </div>
                 </b-form-group>
 
@@ -30,7 +30,7 @@
                               label-cols-sm="3"
                               label-size="sm"
                 >
-                  <div id="email">{{ model_form.email }}</div>
+                  <div id="email">{{ form.email }}</div>
                 </b-form-group>
 
                 <b-form-group label="Телефон"
@@ -39,7 +39,7 @@
                               label-cols-sm="3"
                               label-size="sm"
                 >
-                  <div id="phone">{{ model_form.phone }}</div>
+                  <div id="phone">{{ form.phone }}</div>
                 </b-form-group>
 
                 <b-form-group label="Instagram"
@@ -48,7 +48,7 @@
                               label-cols-sm="3"
                               label-size="sm"
                 >
-                  <div id="instagram">{{ model_form.instagram }}</div>
+                  <div id="instagram">{{ form.instagram }}</div>
                 </b-form-group>
 
                 <b-form-group label="Дата рождения"
@@ -57,7 +57,7 @@
                               label-cols-sm="3"
                               label-size="sm"
                 >
-                  <div id="birthdate">{{ getTime(model_form.birthdate, short_format) }}</div>
+                  <div id="birthdate">{{ getTime(form.birthdate, short_format) }}</div>
                 </b-form-group>
 
                 <b-form-group label="Рост"
@@ -66,7 +66,7 @@
                               label-cols-sm="3"
                               label-size="sm"
                 >
-                  <div id="height">{{ model_form.height }}</div>
+                  <div id="height">{{ form.height }}</div>
                 </b-form-group>
 
                 <b-form-group label="Талия"
@@ -75,7 +75,7 @@
                               label-cols-sm="3"
                               label-size="sm"
                 >
-                  <div id="waist">{{ model_form.waist }}</div>
+                  <div id="waist">{{ form.waist }}</div>
                 </b-form-group>
 
                 <b-form-group label="Грудь"
@@ -84,7 +84,7 @@
                               label-cols-sm="3"
                               label-size="sm"
                 >
-                  <div id="bust">{{ model_form.bust }}</div>
+                  <div id="bust">{{ form.bust }}</div>
                 </b-form-group>
 
                 <b-form-group label="Бёдра"
@@ -93,7 +93,7 @@
                               label-cols-sm="3"
                               label-size="sm"
                 >
-                  <div id="hips">{{ model_form.hips }}</div>
+                  <div id="hips">{{ form.hips }}</div>
                 </b-form-group>
 
                 <b-form-group label="О себе"
@@ -102,7 +102,7 @@
                               label-cols-sm="3"
                               label-size="sm"
                 >
-                  <div id="about">{{ model_form.about }}</div>
+                  <div id="about">{{ form.about }}</div>
                 </b-form-group>
               </b-card-body>
             </b-card>
@@ -130,8 +130,8 @@
       full_format: "DD.MM.YYYY hh:mm",
       short_format: "DD.MM.YYYY"
     }),
-    created() { this.$store.dispatch("model-forms/getModelForms") },
-    computed: mapGetters("model-forms", ["MODEL_FORMS"]),
+    created() { this.$store.dispatch("forms/getForms") },
+    computed: mapGetters("forms", ["FORMS"]),
     methods: {
       getTime(time, format) {
         if (time) {
@@ -139,8 +139,8 @@
           return moment(date).format(format)
         }
       },
-      passModel(model_form) { this.$store.dispatch("passModel", model_form) },
-      removeModelForm(id) { this.$store.dispatch("model-forms/removeModelForm", id) }
+      passModel(form) { this.$store.dispatch("passModel", form) },
+      removeForm(id) { this.$store.dispatch("forms/removeForm", id) }
     }
   }
 </script>

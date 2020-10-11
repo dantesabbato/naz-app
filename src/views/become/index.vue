@@ -1,6 +1,6 @@
 <template>
   <div id="become" class="fade-in">
-    <b-form id="become-form" @submit.prevent="createModelForm" v-if="show_form">
+    <b-form id="become-form" @submit.prevent="createForm" v-if="show_form">
       <b-row>
 
         <b-col lg>
@@ -144,8 +144,8 @@
       getContactEmail() { return this.$store.getters["contacts/CONTACTS_EMAIL"] }
     },
     methods: {
-      createModelForm() {
-        this.$store.dispatch("model-forms/createModelForm", {
+      createForm() {
+        this.$store.dispatch("forms/createForm", {
           created_at: new Date(),
           name: this.name, surname: this.surname, birthdate: this.birthdate, phone: this.phone, email: this.email,
           instagram: this.instagram, height: this.height, waist: this.waist, bust: this.bust, hips: this.hips,

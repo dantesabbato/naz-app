@@ -1,6 +1,6 @@
 <template>
   <b-modal id="model_form_modal" class="squared" size="xl" hide-header hide-footer>
-    <b-form @submit.prevent="createModel" @reset.prevent="removeModalForm(selectedModel.id)">
+    <b-form @submit.prevent="createModel" @reset.prevent="removeForm(selectedModel.id)">
 
       <b-form-group label="Имя" label-for="name" label-cols-sm="2">
         <b-form-input id="name" v-model="selectedModel.name"/>
@@ -108,10 +108,10 @@
       },
       async createModel() {
         await this.$store.dispatch("models/createModel", this.selectedModel)
-        await this.removeModalForm(this.selectedModel.id)
+        await this.removeForm(this.selectedModel.id)
       },
-      async removeModalForm(id) {
-        await this.$store.dispatch("model-forms/removeModelForm", id)
+      async removeForm(id) {
+        await this.$store.dispatch("forms/removeForm", id)
         this.hideModal()
       }
     }
