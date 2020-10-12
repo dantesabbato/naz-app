@@ -19,11 +19,11 @@
               <b-icon icon="chevron-left" font-scale="0.9"/>
             </b-nav-item>
             <b-nav-item v-if="model.instagram" :href="'https://www.instagram.com/' + model.instagram">
-              <v-icon name="brands/instagram" scale="2"/>
+              <v-icon name="brands/instagram" scale="2.3"/>
             </b-nav-item>
             <b-nav-item class="print">
               <div class="print-desktop"><div class="text"/><b-icon icon="chevron-bar-down" font-scale="0.9"/></div>
-              <v-icon class="print-phone" name="regular/file-pdf" scale="1.8"/>
+              <v-icon class="print-phone" name="regular/file-pdf" scale="2"/>
             </b-nav-item>
           </b-nav>
         </div>

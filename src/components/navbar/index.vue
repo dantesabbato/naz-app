@@ -1,5 +1,5 @@
 <template>
-  <b-navbar id="navbar" toggleable="lg">
+  <b-navbar id="navbar" toggleable="md">
     <b-navbar-toggle target="_blank" @click="$router.go(-1)" class="back-phone">
       <b-icon icon="chevron-left" font-scale="1.2" class="white"/>
     </b-navbar-toggle>
