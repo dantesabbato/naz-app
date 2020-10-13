@@ -19,13 +19,20 @@
 
 //\\//\\//\\// EDIT //\\//\\//\\//
 #model_edit
+  .modal-body
+    display: flex
+    flex-direction: row
+
+  .photos, form
+    width: 50%
+
   .photo
     position: relative
     width: 100%
-    max-width: 400px
     &:hover
       img
         filter: opacity(20%)
+        background-color: white
       .menu
         display: block
     .menu
@@ -35,9 +42,28 @@
       left: 50%
       transform: translate(-50%, -50%)
       -ms-transform: translate(-50%, -50%)
-      width: 100%
+      width: 98%
+
   img
+    height: 600px
+    margin: 5px
     object-fit: cover
-    max-width: 500px
-    height: 300px
+    width: calc(100% - (5px * 2))
+
+  form
+    height: 100%
+    padding: 10px
+    background-color: white
+    margin: 5px
+
+  .modal-content
+    background: none
+
+  //.form-group
+  //  width: 100%
+  //  flex-direction: row
+  //  margin: 2% 20%
+
+  //input, textarea, .form-control
+  //  width: 60%
 //\\//\\//\\//\\/\\//\\//\\//\\//
