@@ -41,9 +41,15 @@ export default {
         }))
       })
     },
-    getModel({ state }, id) { return state.models.find( model => model.id === id ) },
-    async updateModel(context, obj) { await modelsCollection.doc(obj.id).update(obj) },
-    async removeModel(context, id) { await modelsCollection.doc(id).delete() },
+    getModel({ state }, id) {
+      return state.models.find( model => model.id === id )
+    },
+    async updateModel(context, obj) {
+      await modelsCollection.doc(obj.id).update(obj)
+    },
+    async removeModel(context, id) {
+      await modelsCollection.doc(id).delete()
+    },
     async removePhoto(context, obj) {
       await modelsCollection.doc(obj.id).update({ "photos": firestore.FieldValue.arrayRemove(obj.photo) })
     }

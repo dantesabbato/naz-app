@@ -1,24 +1,22 @@
 <template>
-  <div id='app'>
+  <div id="app">
     <router-view/>
     <Footer/>
   </div>
 </template>
 
 <script>
-  import Footer from './components/footer'
+  import Footer from "./components/footer"
   export default {
-    components: { Footer },
-    data: () => ({
-    })
+    components: { Footer }
   }
 </script>
 
-<style lang='sass'>
+<style lang="sass">
   html, body, #app
     height: 100%
   #app
-    font-family: 'Cedra4F'
+    font-family: "Cedra4F"
     display: grid !important
     grid-template-rows: 1fr auto
   #footer

@@ -4,7 +4,7 @@
       <b-row>
 
         <b-col lg>
-          <span v-if="$v.name.$error">
+          <div class="error" v-if="$v.name.$error">
             <template v-if="!$v.name.required">
               Введите имя
             </template>
@@ -17,7 +17,7 @@
             <template v-else>
               Имя обязательно для заполнения
             </template>
-          </span>
+          </div>
           <b-form-input v-model.trim="name" placeholder="Name / Имя" @blur="$v.name.$touch()"/>
         </b-col>
 
@@ -29,16 +29,16 @@
       <b-row>
 
         <b-col lg>
-          <span v-if="$v.email.$error">
+          <div class="error" v-if="$v.email.$error">
             <template v-if="!$v.email.email">Введите email</template>
-          </span>
+          </div>
           <b-form-input v-model="email" placeholder="Email" type="email" @blur="$v.email.$touch()"/>
         </b-col>
 
         <b-col lg>
-          <span v-if="$v.phone.$error">
+          <div class="error" v-if="$v.phone.$error">
             Введите номер телефона
-          </span>
+          </div>
           <b-form-input v-model="phone" placeholder="Mobile / Телефон" type="tel" @blur="$v.phone.touch()"/>
         </b-col>
 
@@ -46,9 +46,9 @@
       <b-row>
 
         <b-col lg>
-          <span v-if="$v.birthdate.$error">
+          <div class="error" v-if="$v.birthdate.$error">
             Укажите дату рождения
-          </span>
+          </div>
           <b-form-datepicker id="become-form-datepicker"
                              v-model="birthdate"
                              placeholder="Birth date / Дата рождения"
@@ -83,11 +83,11 @@
       <b-row>
 
         <b-col lg>
-          <span v-if="$v.about.$error">
+          <div class="error" v-if="$v.about.$error">
             <template v-if="!$v.about.maxLength">
               Длина текста не долна превышать 300 символов
             </template>
-          </span>
+          </div>
           <b-form-textarea v-model="about"
                            rows="4"
                            placeholder="Tell us more about yourself / Расскажите о себе"

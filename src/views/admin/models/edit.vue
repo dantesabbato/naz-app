@@ -5,8 +5,18 @@
 
           <img :src="photo">
           <b-button-group class="menu" vertical>
-            <b-button variant="outline-danger" squared @click="removePhoto(photo)">Удалить</b-button>
-            <b-button v-if="index !== 0" variant="outline-dark" squared>Установить как превью</b-button>
+            <b-button v-if="index !== 0" variant="link" @click="movePhoto(index, - 1)">
+              <b-icon icon="chevron-up" scale="4" class="m-3"/>
+            </b-button>
+            <b-button v-if="index !== 0" variant="link" squared @click="setAsPreview(index)">
+              <b-icon icon="chevron-double-up" scale="4" class="m-4"/>
+            </b-button>
+            <b-button variant="link" squared @click="removePhoto(photo)">
+              <b-icon icon="x" scale="6" class="m-4"/>
+            </b-button>
+            <b-button v-if="index !== (selectedModel.photos.length - 1)" variant="link" @click="movePhoto(index, 1)">
+              <b-icon icon="chevron-down" scale="4" class="m-4"/>
+            </b-button>
           </b-button-group>
 
         </div>
@@ -68,12 +78,17 @@
           <b-form-input id="eyes" v-model="selectedModel.eyes"/>
         </b-form-group>
 
-        <b-button type="submit" variant="outline-dark" class="font-weight-bold" squared>
-          Обновить
-        </b-button>
-        <b-button @click="removeModel" variant="outline-danger" class="ml-2 font-weight-bold" squared>
-          Удалить
-        </b-button>
+        <b-button-group class="mt-3 float-right">
+          <b-button variant="outline-dark" class="font-weight-bold">
+            Добавить фото
+          </b-button>
+          <b-button type="submit" variant="outline-dark" class="ml-2 font-weight-bold" squared>
+            Обновить
+          </b-button>
+          <b-button @click="removeModel" variant="outline-danger" class="ml-2 font-weight-bold" squared>
+            Удалить
+          </b-button>
+        </b-button-group>
       </b-form>
   </b-modal>
 </template>
@@ -104,6 +119,14 @@
       },
       async removePhoto(photo) {
         await this.$store.dispatch("models/removePhoto", { id: this.selectedModel.id, photo: photo } )
+      },
+      setAsPreview(index) {
+        let photos = this.selectedModel.photos
+        photos.unshift(photos.splice(index, 1)[0])
+      },
+      movePhoto(index, position) {
+        let photos = this.selectedModel.photos
+        photos.splice(index + position, 0, photos.splice(index, 1)[0])
       }
     }
   }
