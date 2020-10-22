@@ -32,9 +32,9 @@
     &:hover
       img
         filter: brightness(100%) invert(40%)
-      .menu
+      .btn-group-vertical
         display: block
-    .menu
+    .btn-group-vertical
       display: none
       position: absolute
       top: 50%
@@ -42,6 +42,10 @@
       transform: translate(-50%, -50%)
       -ms-transform: translate(-50%, -50%)
       width: 98%
+      .btn-link
+        color: white
+        &:hover
+          color: black
 
   img
     height: 600px
@@ -54,15 +58,17 @@
     padding: 10px
     background-color: white
     margin: 5px
+    legend
+      color: #919191
+    .btn-link
+      color: #919191
+      &:hover
+        color: black
+
+  .btn
+    border: none
 
   .modal-content
     background: none
 
-  //.form-group
-  //  width: 100%
-  //  flex-direction: row
-  //  margin: 2% 20%
-
-  //input, textarea, .form-control
-  //  width: 60%
 //\\//\\//\\//\\/\\//\\//\\//\\//

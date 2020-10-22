@@ -4,89 +4,142 @@
         <div class="photo" v-for="(photo, index) in selectedModel.photos" :key="photo">
 
           <img :src="photo">
-          <b-button-group class="menu" vertical>
-            <b-button v-if="index !== 0" variant="link" @click="movePhoto(index, - 1)">
-              <b-icon icon="chevron-up" scale="4" class="m-3"/>
+          <b-button-group vertical>
+            <b-button v-if="index !== 0"
+                      variant="link"
+                      @click="movePhoto(index, - 1)"
+            >
+              <b-icon class="m-3"
+                      icon="chevron-up"
+                      scale="4"
+              />
             </b-button>
-            <b-button v-if="index !== 0" variant="link" squared @click="setAsPreview(index)">
-              <b-icon icon="chevron-double-up" scale="4" class="m-4"/>
+            <b-button v-if="index !== 0"
+                      variant="link"
+                      squared
+                      @click="setAsPreview(index)"
+            >
+              <b-icon class="m-4"
+                      icon="chevron-double-up"
+                      scale="4"
+              />
             </b-button>
-            <b-button variant="link" squared @click="removePhoto(photo)">
-              <b-icon icon="x" scale="6" class="m-4"/>
+            <b-button variant="link"
+                      squared
+                      @click="removePhoto(photo)"
+            >
+              <b-icon class="m-4"
+                      icon="x"
+                      scale="6"
+              />
             </b-button>
-            <b-button v-if="index !== (selectedModel.photos.length - 1)" variant="link" @click="movePhoto(index, 1)">
-              <b-icon icon="chevron-down" scale="4" class="m-4"/>
+            <b-button v-if="index !== (selectedModel.photos.length - 1)"
+                      variant="link"
+                      @click="movePhoto(index, 1)"
+            >
+              <b-icon class="m-4"
+                      icon="chevron-down"
+                      scale="4"
+              />
             </b-button>
           </b-button-group>
 
         </div>
       </div>
-      <b-form @submit.prevent="updateModel">
-        <b-form-group label="Имя" label-for="name" v-bind="form_group_options">
-          <b-form-input id="name" v-model="selectedModel.name"/>
+      <b-form @submit.prevent="updateModel" class="pt-3">
+        <b-form-group label="Имя" v-bind="form_group_options">
+          <b-form-input v-model="selectedModel.name"/>
         </b-form-group>
 
-        <b-form-group label="Фамилия" label-for="surname" v-bind="form_group_options">
-          <b-form-input id="surname" v-model="selectedModel.surname"/>
+        <b-form-group label="Фамилия" v-bind="form_group_options">
+          <b-form-input v-model="selectedModel.surname"/>
         </b-form-group>
 
-        <b-form-group label="Email" label-for="email" v-bind="form_group_options">
-          <b-form-input id="email" v-model="selectedModel.email"/>
+        <b-form-group label="Email" v-bind="form_group_options">
+          <b-form-input v-model="selectedModel.email"/>
         </b-form-group>
 
-        <b-form-group label="Телефон" label-for="phone" v-bind="form_group_options">
-          <b-form-input id="phone" v-model="selectedModel.phone"/>
+        <b-form-group label="Телефон" v-bind="form_group_options">
+          <b-form-input v-model="selectedModel.phone"/>
         </b-form-group>
 
-        <b-form-group label="Instagram" label-for="instagram" v-bind="form_group_options">
-          <b-form-input id="instagram" v-model="selectedModel.instagram"/>
+        <b-form-group label="Instagram" v-bind="form_group_options">
+          <b-form-input v-model="selectedModel.instagram"/>
         </b-form-group>
 
-        <b-form-group label="Дата рождения" label-for="birthdate" v-bind="form_group_options">
-          <b-form-datepicker id="birthdate" v-model="selectedModel.birthdate"/>
+        <b-form-group label="Дата рождения" v-bind="form_group_options">
+          <b-form-datepicker v-model="selectedModel.birthdate"/>
         </b-form-group>
 
-        <b-form-group label="Рост" label-for="height" v-bind="form_group_options">
-          <b-form-input id="height" v-model="selectedModel.height"/>
+        <b-form-group label="Рост" v-bind="form_group_options">
+          <b-form-input v-model="selectedModel.height"/>
         </b-form-group>
 
-        <b-form-group label="Талия" label-for="waist" v-bind="form_group_options">
-          <b-form-input id="waist" v-model="selectedModel.waist"/>
+        <b-form-group label="Талия" v-bind="form_group_options">
+          <b-form-input v-model="selectedModel.waist"/>
         </b-form-group>
 
-        <b-form-group label="Грудь" label-for="bust" v-bind="form_group_options">
-          <b-form-input id="bust" v-model="selectedModel.bust"/>
+        <b-form-group label="Грудь" v-bind="form_group_options">
+          <b-form-input v-model="selectedModel.bust"/>
         </b-form-group>
 
-        <b-form-group label="Бёдра" label-for="hips" v-bind="form_group_options">
-          <b-form-input id="hips" v-model="selectedModel.hips"/>
+        <b-form-group label="Бёдра" v-bind="form_group_options">
+          <b-form-input v-model="selectedModel.hips"/>
         </b-form-group>
 
-        <b-form-group label="О себе" label-for="about" v-bind="form_group_options">
-          <b-form-textarea id="about" v-model="selectedModel.about"/>
+        <b-form-group label="О себе" v-bind="form_group_options">
+          <b-form-textarea v-model="selectedModel.about"/>
         </b-form-group>
 
         <b-form-group label="Пол" v-bind="form_group_options">
-          <b-form-radio-group v-model="selectedModel.gender" buttons button-variant="outline-dark" :options="gender_radios"/>
+          <b-form-radio-group v-model="selectedModel.gender"
+                              buttons
+                              button-variant="outline-dark"
+                              :options="gender_radios"
+          />
         </b-form-group>
 
-        <b-form-group label="Волосы" label-for="hair" v-bind="form_group_options">
-          <b-form-input id="hair" v-model="selectedModel.hair"/>
+        <b-form-group label="Волосы" v-bind="form_group_options">
+          <b-form-input v-model="selectedModel.hair"/>
         </b-form-group>
 
-        <b-form-group label="Глаза" label-for="eyes" v-bind="form_group_options">
-          <b-form-input id="eyes" v-model="selectedModel.eyes"/>
+        <b-form-group label="Глаза" v-bind="form_group_options">
+          <b-form-input v-model="selectedModel.eyes"/>
         </b-form-group>
 
         <b-button-group class="mt-3 float-right">
-          <b-button variant="outline-dark" class="font-weight-bold">
-            Добавить фото
+          <b-form-file class="font-weight-bold"
+                       variant="link"
+                       plain
+                       v-model="new_photo"
+          >
+            <b-icon icon="image"
+                    scale="1.6"
+            />
+          </b-form-file>
+          <b-button class="ml-2 font-weight-bold"
+                    variant="link"
+                    @click="removeModel"
+          >
+            <b-icon icon="trash"
+                    scale="1.4"
+            />
           </b-button>
-          <b-button type="submit" variant="outline-dark" class="ml-2 font-weight-bold" squared>
-            Обновить
+          <b-button class="ml-2 font-weight-bold"
+                    type="submit"
+                    variant="link"
+          >
+            <b-icon icon="check2"
+                    scale="2"
+            />
           </b-button>
-          <b-button @click="removeModel" variant="outline-danger" class="ml-2 font-weight-bold" squared>
-            Удалить
+          <b-button class="ml-2 font-weight-bold"
+                    type="cancel"
+                    variant="link"
+          >
+            <b-icon icon="x"
+                    scale="2"
+            />
           </b-button>
         </b-button-group>
       </b-form>
@@ -95,9 +148,11 @@
 
 <script>
   import { mapState } from "vuex"
+  let uuid = require("uuid")
   export default {
     name: "admin_modal",
     data: () => ({
+      new_photo: null,
       gender_radios: [ { text: "М", value: true }, { text: "Ж", value: false } ],
       form_group_options: {
         labelColsLg: 3,
@@ -105,6 +160,15 @@
       }
     }),
     computed: mapState(["selectedModel"]),
+    watch: {
+      new_photo: async function () {
+        let fileName = uuid.v1()
+        await this.$store.dispatch("models/addPhoto", {
+          id: this.selectedModel.id,
+          photo: { file: this.new_photo, file_name: fileName }
+        })
+      }
+    },
     methods: {
       hideModal () {
         this.$bvModal.hide("model_edit")

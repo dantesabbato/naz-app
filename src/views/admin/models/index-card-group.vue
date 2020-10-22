@@ -1,7 +1,7 @@
 <template>
   <b-card-group deck>
     <div v-for="model in models" :key="model.id">
-      <b-card class="shadow-lg squared"
+      <b-card class="shadow-lg squared mr-3 mb-4"
               :img-src="model.photos[0]"
               img-left bg-variant="dark"
               text-variant="white"

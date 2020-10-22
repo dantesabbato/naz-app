@@ -37,7 +37,8 @@ export default {
           let photoRef = storage.ref().child(photo.file_name)
           await photoRef.put(photo.file, { contentType: "image/png" })
           let path = await photoRef.getDownloadURL()
-          await modelsCollection.doc(docRef.id).update({"photos": firestore.FieldValue.arrayUnion(path) })
+          // TODO: Fix it
+          await modelsCollection.doc(docRef.id).update({ "photos": firestore.FieldValue.arrayUnion(path) })
         }))
       })
     },
@@ -49,6 +50,12 @@ export default {
     },
     async removeModel(context, id) {
       await modelsCollection.doc(id).delete()
+    },
+    async addPhoto(context, obj) {
+      let photoRef = storage.ref().child(obj.photo.file_name)
+      await photoRef.put(obj.photo.file, { contentType: "image/png" })
+      let path = await photoRef.getDownloadURL()
+      await modelsCollection.doc(obj.id).update({ "photos": firestore.FieldValue.arrayUnion(path) })
     },
     async removePhoto(context, obj) {
       await modelsCollection.doc(obj.id).update({ "photos": firestore.FieldValue.arrayRemove(obj.photo) })
