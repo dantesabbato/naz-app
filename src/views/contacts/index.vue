@@ -9,24 +9,29 @@
       <b-row>
         <b-col lg>
           <div class="font-weight-bold">To become a model</div>
-          <a :href="'mailto:' + CONTACTS_EMAIL">{{ CONTACTS_EMAIL }}</a>
+          <a :href="'mailto:' + EMAIL">{{ EMAIL }}</a>
         </b-col>
 
         <b-col lg>
           <div class="font-weight-bold">CEO</div>
-          <a :href="'mailto:' + CONTACTS_CEO_EMAIL">{{ CONTACTS_CEO_EMAIL }}</a>
+          <a :href="'mailto:' + CEO_EMAIL">{{ CEO_EMAIL }}</a>
         </b-col>
 
         <b-col lg>
           <div class="font-weight-bold">Head booker</div>
-          <a :href="'mailto:' + CONTACTS_BOOKER_EMAIL">{{ CONTACTS_BOOKER_EMAIL }}</a>
+          <a :href="'mailto:' + BOOKER_EMAIL">{{ BOOKER_EMAIL }}</a>
         </b-col>
       </b-row>
 
-      <b-row>
-        <b-col>
+      <b-row align-h="center">
+        <b-col lg="4">
           <div class="font-weight-bold">Tel:</div>
-          <a :href="'tel:' + CONTACTS_PHONE">{{ CONTACTS_PHONE }}</a>
+          <a :href="'tel:' + PHONE">{{ PHONE }}</a>
+        </b-col>
+
+        <b-col lg="4">
+          <div class="font-weight-bold">Booker's tel:</div>
+          <a :href="'tel:' + BOOKER_PHONE">{{ BOOKER_PHONE }}</a>
         </b-col>
       </b-row>
   </div>
@@ -36,9 +41,7 @@
   import { mapGetters } from "vuex"
   export default {
     name: "contacts",
-    computed: mapGetters("contacts", [
-      "CONTACTS_EMAIL", "CONTACTS_CEO_EMAIL", "CONTACTS_BOOKER_EMAIL", "CONTACTS_PHONE"
-    ]),
+    computed: mapGetters("contacts", [ "EMAIL", "PHONE", "CEO_EMAIL", "BOOKER_EMAIL", "BOOKER_PHONE" ]),
     created () { this.$store.dispatch("contacts/getContacts") }
   }
 </script>

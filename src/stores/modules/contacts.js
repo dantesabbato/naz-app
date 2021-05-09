@@ -3,10 +3,11 @@ import { contentCollection } from '@/firebase'
 export default {
   state: { contacts: {} },
   getters: {
-    CONTACTS_EMAIL: state => { return state.contacts.email },
-    CONTACTS_PHONE: state => { return state.contacts.phone },
-    CONTACTS_CEO_EMAIL: state => { return state.contacts.ceo_email },
-    CONTACTS_BOOKER_EMAIL: state => { return state.contacts.booker_email }
+    EMAIL: state => { return state.contacts.email },
+    PHONE: state => { return state.contacts.phone },
+    CEO_EMAIL: state => { return state.contacts.ceo_email },
+    BOOKER_EMAIL: state => { return state.contacts.booker_email },
+    BOOKER_PHONE: state => { return state.contacts.booker_phone }
   },
   mutations: { setContacts(state, val) { state.contacts = val } },
   actions: {

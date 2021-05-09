@@ -23,7 +23,7 @@
   import New from "./new"
   import CardGroup from "./index-card-group"
   export default {
-    name: 'admin_models',
+    name: "admin_models",
     components: { Edit, New, CardGroup },
     created() { this.$store.dispatch("models/getModels") }
   }

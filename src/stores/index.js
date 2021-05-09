@@ -8,12 +8,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    userProfile: {},
-    selectedModel: {}
+    userProfile: {}
   },
   mutations: {
-    setUserProfile(state, val) { state.userProfile = val },
-    setSelectedModel(state, val) { state.selectedModel = val }
+    setUserProfile(state, val) { state.userProfile = val }
   },
   actions: {
     async fetchUserProfile({ commit }, user) {
@@ -30,14 +28,8 @@ export default new Vuex.Store({
       commit("setUserProfile", {})
       router.push("/")
     },
-    passModel({ commit }, model) {
-      commit("setSelectedModel", model)
-    },
     updateContent({ commit }, obj) {
-      for (let property in obj) {
-        console.log(property)
-        fb.contentCollection.doc(property).update(obj[property])
-      }
+      for (let property in obj) { fb.contentCollection.doc(property).update(obj[property]) }
       commit("contacts/setContacts", obj.contacts)
       commit("info/setInfo", obj.info)
       commit("become/setBecome", obj.become)

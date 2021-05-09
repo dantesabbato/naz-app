@@ -7,7 +7,7 @@ export default {
   actions: {
     getForms({ state, commit }) {
       if (state.forms.length) { return }
-      return new Promise((resolve) => {
+      return new Promise(resolve => {
         formsCollection
         .orderBy("created_at", "desc")
         .onSnapshot(snapshot => {

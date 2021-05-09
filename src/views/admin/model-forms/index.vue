@@ -1,7 +1,7 @@
 <template>
   <div id='dashboard'>
     <Edit/>
-    <div id='model_forms' class="pt-5">
+    <div id='model_forms'>
       <b-container>
         <b-card-group v-if="FORMS.length">
           <div v-for="form in FORMS"
@@ -139,7 +139,7 @@
           return moment(date).format(format)
         }
       },
-      passModel(form) { this.$store.dispatch("passModel", form) },
+      passModel(form) { this.$store.commit("models/setModel", form) },
       removeForm(id) { this.$store.dispatch("forms/removeForm", id) }
     }
   }

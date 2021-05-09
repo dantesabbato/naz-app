@@ -1,5 +1,5 @@
 <template>
-  <b-modal id="model_edit" size="xl" hide-footer hide-header>
+  <b-modal id="archive_edit" size="xl" hide-footer hide-header>
 
     <div class="photos">
       <div class="photo" v-for="(photo, index) in selectedModel.photos" :key="index">
@@ -7,7 +7,7 @@
       </div>
     </div>
 
-    <b-form @submit.prevent="updateModel" class="pt-3">
+    <b-form @submit.prevent="createModel" class="pt-3">
       <b-form-group label="Имя" v-bind="form_group_options">
         <b-form-input v-model="selectedModel.name"/>
       </b-form-group>
@@ -82,14 +82,7 @@
 
         <b-button class="ml-2 font-weight-bold"
                   variant="link"
-                  @click="addToArchive"
-        >
-          <b-icon icon="archive" scale="1.7"/>
-        </b-button>
-
-        <b-button class="ml-2 font-weight-bold"
-                  variant="link"
-                  @click="removeModel"
+                  @click="removeFromArchive"
         >
           <b-icon icon="trash" scale="1.7"/>
         </b-button>
@@ -114,14 +107,14 @@
 </template>
 
 <script>
-  import Photo from "./edit-photo"
+  import Photo from "../models/edit-photo"
   import { mapState } from "vuex"
   let uuid = require("uuid")
   export default {
     name: "admin_modal",
     components: { Photo },
     data: () => ({
-      photos: null,
+      // photos: null,
       new_photo: null,
       gender_radios: [ { text: "М", value: true }, { text: "Ж", value: false } ],
       form_group_options: {
@@ -140,19 +133,16 @@
       }
     },
     methods: {
-      hideModal () {
-        this.$bvModal.hide("model_edit")
-      },
-      async updateModel() {
-        await this.$store.dispatch("models/updateModel")
+      hideModal () { this.$bvModal.hide("archive_edit") },
+
+      async createModel() {
+        await this.$store.dispatch("models/moveFromArchive")
+        await this.removeFromArchive(this.selectedModel.id)
         this.hideModal()
       },
-      async addToArchive() {
-        await this.$store.dispatch("archive/addToArchive")
-        this.hideModal()
-      },
-      async removeModel() {
-        await this.$store.dispatch("models/removeModel", this.selectedModel.id)
+
+      async removeFromArchive() {
+        await this.$store.dispatch("archive/removeFromArchive", this.selectedModel.id)
         this.hideModal()
       }
     }

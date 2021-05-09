@@ -1,4 +1,54 @@
 #admin
-  nav
-    font-size: 1.4em
-    height: 50px
+  .navbar
+    font-family: "Cedra4F"
+    font-size: 2rem
+    .navbar-collapse
+      .navbar-nav
+        width: 100%
+        .nav-item
+          padding: 0 12px
+          a:hover
+            text-decoration: underline
+    @media all and (max-width: $tablet)
+      font-size: 1.5em
+    .nav-extra
+      display: none
+      @media all and (max-width: $phone)
+        display: flex
+        flex-direction: row
+        width: 100%
+        justify-content: space-evenly
+        .nav-item
+          &:first-child
+            margin-top: 4px
+          &:last-child
+            margin-top: 9px
+    @media all and (max-width: $phone)
+      background-color: black
+      box-shadow: 0 0 10px rgba(0,0,0,0.5)
+      //font-size: 1.5rem
+      padding: 0
+      position: fixed
+      text-align: center
+      width: 100%
+      z-index: 1
+      .navbar-nav
+        padding-bottom: 10px
+        .nav-item .nav-link
+          color: white
+
+    .navbar-toggler
+      border: none
+      color: black !important
+      font-size: 27px
+      position: fixed!important
+      right: 1%
+      //top: 12px
+      z-index: 1
+
+    .back-phone
+      left: 0
+
+  .content
+    @media all and (max-width: $phone)
+      margin-top: 90px

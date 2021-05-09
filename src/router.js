@@ -28,7 +28,8 @@ const routes = [
     children: [
       { path: "dashboard", alias: "/", name: "dashboard", component: () => import("./views/admin/model-forms") },
       { path: "models", name: "admin-models", component: () => import("./views/admin/models") },
-      { path: "content", name: "admin-content", component: () => import("./views/admin/content") }
+      { path: "content", name: "admin-content", component: () => import("./views/admin/content") },
+      { path: "archive", name: "admin-archive", component: () => import("./views/admin/archive") }
     ],
     meta: { requiresAuth: true }
   },

@@ -69,7 +69,7 @@
     methods: {
       async init() {
         await this.$store.dispatch("models/getModels")
-        this.model = await this.$store.dispatch("models/getModel", this.id)
+        this.model = await this.$store.getters["models/MODEL"](this.id)
       },
       getInches(value) {
         if (this.selectedMeasurement === "in") {

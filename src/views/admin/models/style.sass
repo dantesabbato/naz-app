@@ -1,6 +1,11 @@
-//\\//\\//\\// INDEX //\\//\\//\\//
+.btn-group
+  display: flex
+
+.modal-backdrop
+  opacity: 0.9
+
+//\\//\\//\\//\\//\\//\\//\\//\\//\\// INDEX //\\//\\//\\//\\//\\//\\//\\//\\//\\//
 #admin_models
-  margin-top: 4%
   .nav
     margin-bottom: 15px
     &-link.active
@@ -10,25 +15,22 @@
       font-weight: bold
     a
       color: black
+//\\//\\//\\//\\/\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//
 
-  img
-    object-fit: cover
-    width: 200px
-    height: 300px
-//\\//\\//\\//\\/\\//\\//\\//\\//
-
-//\\//\\//\\// EDIT //\\//\\//\\//
+//\\//\\//\\//\\//\\//\\//\\//\\//\\// EDIT //\\//\\//\\//\\//\\//\\//\\//\\//\\//
 #model_edit
   .modal-body
     display: flex
     flex-direction: row
-
-  .photos, form
-    width: 50%
-
+    justify-content: flex-end
+    @media all and (max-width: $tablet)
+      flex-direction: column-reverse
+    //@media all and (max-width: $phone)
   .photo
     position: relative
-    width: 100%
+    width: 50%
+    @media all and (max-width: $tablet)
+      width: auto
     &:hover
       img
         filter: brightness(100%) invert(40%)
@@ -46,29 +48,98 @@
         color: white
         &:hover
           color: black
-
   img
     height: 600px
     margin: 5px
     object-fit: cover
     width: calc(100% - (5px * 2))
-
   form
-    height: 100%
-    padding: 10px
-    background-color: white
+    height: auto
     margin: 5px
+    padding: 10px
+    position: fixed
+    width: 20%
+    .btn-menu
+      margin-top: 40px
+    @media all and (max-width: $tablet)
+      display: flex
+      flex-direction: column
+      position: relative
+      width: auto
+      .btn-menu
+        order: -1
     legend
       color: #919191
     .btn-link
       color: #919191
       &:hover
-        color: black
-
+        color: white
+    .form-control
+      color: white
+      background-color: rgba(0,0,0,0) !important
+      border-color: gray !important
+      &:focus
+        border-color: transparent !important
+        box-shadow: 0 0 0 0.1rem rgb(255, 255, 255) !important
+    .b-form-datepicker .btn
+      color: #808080
   .btn
     border: none
-
   .modal-content
     background: none
+//\\//\\//\\//\\/\\//\\//\\//\\//\\//\\//\\//\\/\\//\\//\\//\\//\\//\\//\\//\\
 
-//\\//\\//\\//\\/\\//\\//\\//\\//
+//\\//\\//\\//\\//\\//\\//\\//\\//\\// NEW \\//\\//\\//\\//\\//\\//\\//\\//\\//
+#model_new
+  .modal-body
+    display: flex
+    flex-direction: row
+    justify-content: space-evenly
+
+  .modal-content, .dropzone
+    background-color: #fff0
+
+  .form-control, .btn-group-toggle
+    background-color: rgba(0,0,0,0) !important
+    border-color: gray !important
+    color: white
+    margin-bottom: 12px
+    &:focus
+      border-color: transparent !important
+      box-shadow: 0 0 0 0.1rem rgb(255, 255, 255) !important
+
+  .btn-submit
+    background-color: #808080
+    margin-bottom: 12px
+    width: 100%
+    &:hover
+      background-color: white
+      color: black
+
+  .btn-cancel
+    background-color: transparent
+    border: 1px solid red
+    color: red
+    width: 100%
+    &:hover
+      background-color: white
+      border: none
+      color: black
+
+  .b-form-datepicker .btn
+    color: #808080
+
+  .dropzone
+    border: none
+    display: flex
+    flex-flow: column
+    padding-top: 0
+    .dz-message
+      border: 2px dashed #808080
+      display: block !important
+      margin-top: 0
+    .dz-preview
+      margin: 0 0 20px 0
+      .dz-details
+        background-color: rgb(0 0 0 / 80%)
+//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//

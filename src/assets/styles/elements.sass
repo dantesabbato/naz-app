@@ -1,3 +1,4 @@
+//\\//\\//\\//\\//\\//\\//\\ INPUT //\\//\\//\\//\\//\\//\\
 input, textarea, .btn, .dropdown
   border-radius: 0 !important
   &:focus
@@ -6,3 +7,68 @@ input, textarea, .btn, .dropdown
   svg
     font-size: 100% !important
     vertical-align: baseline !important
+//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
+
+//\\//\\//\\//\\//\\//\\//\\ CARDS //\\//\\//\\//\\//\\//\\
+.card
+  cursor: pointer
+  &-body
+    padding: 0.5rem
+  &-deck
+    width: 70%
+    margin: auto
+    @media all and (max-width: $tablet)
+      width: 86%
+    @media all and (max-width: $phone)
+      width: 70%
+  &-deck a:hover
+    text-decoration: none
+  p
+    color: black
+    font-size: 1.5em
+    text-transform: uppercase
+    text-align: center
+  img
+    object-fit: cover
+    max-width: 300px
+    height: 400px
+    border-radius: 0
+//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
+
+//\\//\\//\\//\\//\\//\\ CALENDAR //\\//\\//\\//\\//\\//\\
+.dropdown-menu
+  background-color: #393939b8
+  border: none
+  border-radius: 0
+  .b-calendar
+    &-header
+      display: none
+    &-grid
+      border: none !important
+      &:focus
+        box-shadow: none !important
+      &-help
+        display: none
+      span
+        &:hover
+          background-color: gray
+      .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle
+        color: #000000
+        background-color: #ffffff
+        border: none
+      .border-bottom
+        border-bottom: none!important
+      .text-dark
+        color: white!important
+//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
+
+//\\//\\//\\//\\//\\//\\ RADIO BUTTONS //\\//\\//\\//\\//\\
+.btn-group-toggle
+  width: 100%
+  .btn
+    background-color: transparent
+    border: 1px solid #808080 !important
+    color: #808080
+    &.active
+      background-color: #808080 !important
+//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//

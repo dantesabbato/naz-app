@@ -1,28 +1,16 @@
 <template>
   <div id="women" class="models">
-    <b-card-group deck class="fade-in">
-      <router-link v-for="model in $store.getters['models/WOMEN']"
-                   :key="model.id"
-                   :to="{ name: 'model', params: { id: model.id } }"
-      >
-        <b-card :img-src="model.photos[0]"
-                img-top
-                class="border-0"
-        >
-          <b-card-text>
-            {{ model.name }}
-          </b-card-text>
-        </b-card>
-      </router-link>
-    </b-card-group>
+    <CardGroup :models="$store.getters['models/WOMEN']"/>
   </div>
 </template>
 
 <script>
-export default {
-  name: "women",
-  created () { this.$store.dispatch("models/getModels") }
-}
+  import CardGroup from "./card-group"
+  export default {
+    name: "women",
+    components: { CardGroup },
+    created () { this.$store.dispatch("models/getModels") }
+  }
 </script>
 
 <style lang="sass"> @import "style" </style>
