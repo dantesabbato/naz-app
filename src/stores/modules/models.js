@@ -45,15 +45,14 @@ export default {
     },
     async createModel({ state }) {
       let model = state.model
-      model.created_at  = firestore.Timestamp.fromDate(new Date())
+      // model.created_at  = firestore.Timestamp.fromDate(new Date())
       await modelsCollection.add(
-      //   {
-      //   name: model.name, surname: model.surname, birthdate: model.birthdate, gender: model.gender, phone: model.phone,
-      //   email: model.email, instagram: model.email, height: model.height, waist: model.waist, bust: model.bust,
-      //   hips: model.hips, hair: model.hair || "", eyes: model.eyes || "", about: model.about, photos: [],
-      //   created_at: firestore.Timestamp.fromDate(new Date())
-      // }
-      model).then(async docRef => {
+        {
+        name: model.name, surname: model.surname, birthdate: model.birthdate, gender: model.gender, phone: model.phone,
+        email: model.email, instagram: model.email, height: model.height, waist: model.waist, bust: model.bust,
+        hips: model.hips, hair: model.hair || "", eyes: model.eyes || "", about: model.about, photos: [],
+        created_at: firestore.Timestamp.fromDate(new Date())
+      }).then(async docRef => {
         await Promise.all(model.photos.map(async photo => {
           let photoRef = storage.ref().child(photo.file_name)
           await photoRef.put(photo.file, { contentType: "image/png" })

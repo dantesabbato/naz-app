@@ -1,115 +1,40 @@
 <template>
-  <div id='dashboard'>
+  <div id="dashboard">
     <Edit/>
-    <div id='model_forms'>
-      <b-container>
-        <b-card-group v-if="FORMS.length">
-          <div v-for="form in FORMS"
-               :key='form.id'
-          >
-            <b-card class="squared border-dark shadow-lg m-2"
-                    v-b-modal.model_form_modal
-                    @click="passModel(form)"
+    <div id="model_forms">
+      <b-card-group v-if="FORMS.length">
+        <b-card v-for="form in FORMS"
+                :key='form.id'
+                v-b-modal.model_form_modal
+                class="squared shadow-lg m-2"
+                border-variant="dark"
+                @click="passModel(form)"
+        >
+          <b-card-body>
+            <b-button variant="link" @click="removeForm(form.id)" @click.stop="passModel()"><v-icon name="times" scale="1.3"/></b-button>
+            <b-form-group :label="getTime(form.created_at, full_format)"
+                          label-cols-sm="4"
+                          label-size="md"
+                          label-align="left"
             >
-              <b-card-body>
-                <b-button @click="removeForm(form.id)"><v-icon name="times" scale="1.3"/></b-button>
-                <b-form-group label-cols-sm="3"
-                              :label="getTime(form.created_at, full_format)"
-                              label-for="name"
-                              label-align="left"
-                              label-size="sm"
-                >
-                  <div id="name" class="text-uppercase font-weight-bold">
-                    {{ form.name + " " + form.surname }}
-                  </div>
-                </b-form-group>
-
-                <b-form-group label="Email"
-                              label-for="email"
-                              label-align="right"
-                              label-cols-sm="3"
-                              label-size="sm"
-                >
-                  <div id="email">{{ form.email }}</div>
-                </b-form-group>
-
-                <b-form-group label="Телефон"
-                              label-for="phone"
-                              label-align="right"
-                              label-cols-sm="3"
-                              label-size="sm"
-                >
-                  <div id="phone">{{ form.phone }}</div>
-                </b-form-group>
-
-                <b-form-group label="Instagram"
-                              label-for="instagram"
-                              label-align="right"
-                              label-cols-sm="3"
-                              label-size="sm"
-                >
-                  <div id="instagram">{{ form.instagram }}</div>
-                </b-form-group>
-
-                <b-form-group label="Дата рождения"
-                              label-for="birthdate"
-                              label-align="right"
-                              label-cols-sm="3"
-                              label-size="sm"
-                >
-                  <div id="birthdate">{{ getTime(form.birthdate, short_format) }}</div>
-                </b-form-group>
-
-                <b-form-group label="Рост"
-                              label-for="height"
-                              label-align="right"
-                              label-cols-sm="3"
-                              label-size="sm"
-                >
-                  <div id="height">{{ form.height }}</div>
-                </b-form-group>
-
-                <b-form-group label="Талия"
-                              label-for="waist"
-                              label-align="right"
-                              label-cols-sm="3"
-                              label-size="sm"
-                >
-                  <div id="waist">{{ form.waist }}</div>
-                </b-form-group>
-
-                <b-form-group label="Грудь"
-                              label-for="bust"
-                              label-align="right"
-                              label-cols-sm="3"
-                              label-size="sm"
-                >
-                  <div id="bust">{{ form.bust }}</div>
-                </b-form-group>
-
-                <b-form-group label="Бёдра"
-                              label-for="hips"
-                              label-align="right"
-                              label-cols-sm="3"
-                              label-size="sm"
-                >
-                  <div id="hips">{{ form.hips }}</div>
-                </b-form-group>
-
-                <b-form-group label="О себе"
-                              label-for="about"
-                              label-align="right"
-                              label-cols-sm="3"
-                              label-size="sm"
-                >
-                  <div id="about">{{ form.about }}</div>
-                </b-form-group>
-              </b-card-body>
-            </b-card>
-          </div>
-        </b-card-group>
-        <div v-else id="empty" class="mt-5 text-center"><v-icon name="inbox" scale="10"/><p>ПУСТО</p></div>
-      </b-container>
+              <label>{{ getName(form.name, form.surname) }}</label>
+            </b-form-group>
+            <b-form-group v-bind="form_group_options" label="Email" v-if="form.email">{{ form.email }}</b-form-group>
+            <b-form-group v-bind="form_group_options" label="Телефон">{{ form.phone }}</b-form-group>
+            <b-form-group v-bind="form_group_options" label="Instagram" v-if="form.instagram">{{ form.instagram }}</b-form-group>
+            <b-form-group v-bind="form_group_options" label="Дата рождения">{{ getBirthdate(form.birthdate, short_format) }}</b-form-group>
+            <b-form-group v-bind="form_group_options" label="Рост" v-if="form.height">{{ form.height }}</b-form-group>
+            <b-form-group v-bind="form_group_options" label="Талия" v-if="form.waist">{{ form.waist }}</b-form-group>
+            <b-form-group v-bind="form_group_options" label="Грудь" v-if="form.bust">{{ form.bust }}</b-form-group>
+            <b-form-group v-bind="form_group_options" label="Бёдра" v-if="form.hips">{{ form.hips }}</b-form-group>
+            <b-form-group v-bind="form_group_options" label="О себе" v-if="form.about">{{ form.about }}</b-form-group>
+          </b-card-body>
+        </b-card>
+      </b-card-group>
+      <div v-else id="empty" class="mt-5 text-center">
+        <v-icon name="inbox" scale="10"/>
+        <p>ПУСТО</p>
+      </div>
     </div>
   </div>
 </template>
@@ -128,7 +53,12 @@
         "label-size": "sm"
       }],
       full_format: "DD.MM.YYYY hh:mm",
-      short_format: "DD.MM.YYYY"
+      short_format: "DD.MM.YYYY",
+      form_group_options: {
+        labelColsLg: 4,
+        labelSize: "sm",
+        class: "mb-2"
+      }
     }),
     created() { this.$store.dispatch("forms/getForms") },
     computed: mapGetters("forms", ["FORMS"]),
@@ -138,6 +68,12 @@
           let date = new Date(time.seconds * 1000)
           return moment(date).format(format)
         }
+      },
+      getBirthdate(time, format) {
+        if (time) { return moment(time).format(format) }
+      },
+      getName(name, surname) {
+        if(surname) { return name + " " + surname} else { return name }
       },
       passModel(form) { this.$store.commit("models/setModel", form) },
       removeForm(id) { this.$store.dispatch("forms/removeForm", id) }

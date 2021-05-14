@@ -1,75 +1,35 @@
 <template>
   <b-modal id="model_form_modal" class="squared" size="xl" hide-header hide-footer>
     <b-form @submit.prevent="createModel" @reset.prevent="removeForm(model.id)">
-
-      <b-form-group label="Имя" label-for="name" label-cols-sm="2">
-        <b-form-input id="name" v-model="model.name"/>
-      </b-form-group>
-
-      <b-form-group label="Фамилия" label-for="surname" label-cols-sm="2">
-        <b-form-input id="surname" v-model="model.surname"/>
-      </b-form-group>
-
-      <b-form-group label="Email" label-for="email" label-cols-sm="2">
-        <b-form-input id="email" v-model="model.email"/>
-      </b-form-group>
-
-      <b-form-group label="Телефон" label-for="phone" label-cols-sm="2">
-        <b-form-input id="phone" v-model="model.phone"/>
-      </b-form-group>
-
-      <b-form-group label="Instagram" label-for="instagram" label-cols-sm="2">
-        <b-form-input id="instagram" v-model="model.instagram"/>
-      </b-form-group>
-
-      <b-form-group label="Дата рождения" label-for="birthdate" label-cols-sm="2">
-        <b-form-datepicker id="birthdate" v-model="model.birthdate"/>
-      </b-form-group>
-
-      <b-form-group label="Рост" label-for="height" label-cols-sm="2">
-        <b-form-input id="height" v-model="model.height"/>
-      </b-form-group>
-
-      <b-form-group label="Талия" label-for="waist" label-cols-sm="2">
-        <b-form-input id="waist" v-model="model.waist"/>
-      </b-form-group>
-
-      <b-form-group label="Грудь" label-for="bust" label-cols-sm="2">
-        <b-form-input id="bust" v-model="model.bust"/>
-      </b-form-group>
-
-      <b-form-group label="Бёдра" label-for="hips" label-cols-sm="2">
-        <b-form-input id="hips" v-model="model.hips"/>
-      </b-form-group>
-
-      <b-form-group label="О себе" label-for="about" label-cols-sm="2">
-        <b-form-textarea id="about" v-model="model.about"/>
-      </b-form-group>
-
-      <b-form-group label="Пол" label-cols-sm="2">
+      <b-form-group label="Имя" v-bind="form_group_options"><b-form-input v-model="model.name"/></b-form-group>
+      <b-form-group label="Фамилия" v-bind="form_group_options"><b-form-input v-model="model.surname"/></b-form-group>
+      <b-form-group label="Email" v-bind="form_group_options"><b-form-input v-model="model.email"/></b-form-group>
+      <b-form-group label="Телефон" v-bind="form_group_options"><b-form-input v-model="model.phone"/></b-form-group>
+      <b-form-group label="Instagram" v-bind="form_group_options"><b-form-input v-model="model.instagram"/></b-form-group>
+      <b-form-group label="Дата рождения" v-bind="form_group_options"><b-form-datepicker v-model="model.birthdate"/></b-form-group>
+      <b-form-group label="Рост" v-bind="form_group_options"><b-form-input v-model="model.height"/></b-form-group>
+      <b-form-group label="Талия" v-bind="form_group_options"><b-form-input v-model="model.waist"/></b-form-group>
+      <b-form-group label="Грудь" v-bind="form_group_options"><b-form-input v-model="model.bust"/></b-form-group>
+      <b-form-group label="Бёдра" v-bind="form_group_options"><b-form-input v-model="model.hips"/></b-form-group>
+      <b-form-group label="О себе" v-bind="form_group_options"><b-form-textarea v-model="model.about"/></b-form-group>
+      <b-form-group label="Пол" v-bind="form_group_options">
         <b-form-radio-group v-model="model.gender"
-                            buttons button-variant="outline-dark"
+                            class="gender_radios"
+                            buttons
                             :options="gender_radios"/>
       </b-form-group>
-
-      <b-form-group label="Волосы" label-for="hair" label-cols-sm="2">
-        <b-form-input id="hair" v-model="model.hair"/>
-      </b-form-group>
-
-      <b-form-group label="Глаза" label-for="eyes" label-cols-sm="2">
-        <b-form-input id="eyes" v-model="model.eyes"/>
-      </b-form-group>
-
+      <b-form-group label="Волосы" v-bind="form_group_options"><b-form-input v-model="model.hair"/></b-form-group>
+      <b-form-group label="Глаза" v-bind="form_group_options"><b-form-input v-model="model.eyes"/></b-form-group>
       <vue-dropzone
           ref="imgDropZone"
           id="customdropzone"
           :options="dropzoneOptions"
           @vdropzone-complete="afterComplete"
       />
-
-      <b-button type="reset" variant="outline-danger" size="sm" squared>Удалить</b-button>
-      <b-button type="submit" variant="outline-dark" size="sm" squared>ОК</b-button>
-
+      <b-button-group>
+        <b-button type="reset" variant="outline-danger" size="sm" squared>Удалить</b-button>
+        <b-button type="submit" variant="outline-dark" size="sm" squared>ОК</b-button>
+      </b-button-group>
     </b-form>
   </b-modal>
 </template>
@@ -92,6 +52,9 @@
           <p class='text-default'><i class='fa fa-cloud-upload mr-2'></i>Нажмите или перетащите фото</p>
           <p class="form-text">Допустимые форматы: .jpg, .jpeg, .png</p>
         `
+      },
+      form_group_options: {
+        labelColsLg: 5
       }
     }),
     components: { vueDropzone: vue2Dropzone },

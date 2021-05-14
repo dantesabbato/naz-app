@@ -54,6 +54,7 @@
 
       <b-form-group label="Пол" v-bind="form_group_options">
         <b-form-radio-group v-model="selectedModel.gender"
+                            class="gender_radios"
                             buttons
                             :options="gender_radios"
         />

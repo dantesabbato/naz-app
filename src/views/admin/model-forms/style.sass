@@ -1,12 +1,8 @@
-//\\//\\//\\//\\ INDEX //\\//\\//\\
+//\\//\\//\\//\\//\\//\\//\\//\\ INDEX //\\//\\//\\//\\//\\//\\//\\
 #model_forms
   button
     position: absolute
-    display: block
     right: 10px
-    padding: 0 5px
-    background-color: transparent
-    border: none
     z-index: 1
     svg
       color: black
@@ -14,19 +10,27 @@
     margin-bottom: 0
   .col-form-label-sm
     line-height: 1 !important
-  .card
-    &-body
-      padding: 0.4rem
-      label
-        color: #c8c8c8
-        font-weight: bold
-
+  .card-group
+    align-items: center
+    display: flex
+    flex-direction: column
+    width: 100vw
+    .card
+      border-left: 1px solid black
+      width: clamp(200px, 80%, 600px)
+    label
+      font-size: 1.3em
+      font-weight: bold
+      text-transform: uppercase
+    legend
+      color: #797979
   #empty
     color: lightgray
     p
       font-size: 3rem
+//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\
 
-//\\//\\//\\//\\ SHOW //\\//\\//\\//\\
+//\\//\\//\\//\\//\\//\\//\\//\\ EDIT //\\//\\//\\//\\//\\//\\//
 #model_form_modal
-  .modal-content
-    border-radius: 0
+
+//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\//\\

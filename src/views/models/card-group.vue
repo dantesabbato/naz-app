@@ -1,5 +1,5 @@
 <template>
-  <b-card-group deck class="fade-in">
+  <b-card-group class="fade-in">
     <router-link v-for="model in models"
                  :key="model.id"
                  :to="{ name: 'model', params: { id: model.id } }"

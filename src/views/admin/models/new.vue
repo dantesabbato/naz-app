@@ -17,7 +17,7 @@
       <b-form-input v-model="model.waist" placeholder="Талия"/>
       <b-form-input v-model="model.bust" placeholder="Грудь"/>
       <b-form-input v-model="model.hips" placeholder="Бёдра"/>
-      <b-form-radio-group v-model="model.gender" buttons button-variant="outline-dark" :options="gender_radios"/>
+      <b-form-radio-group v-model="model.gender" class="gender_radios" buttons :options="gender_radios"/>
       <b-form-input v-model="model.hair" placeholder="Волосы"/>
       <b-form-input v-model="model.eyes" placeholder="Глаза"/>
       <b-form-textarea v-model="model.about" placeholder="Дополнительное инфо"/>
